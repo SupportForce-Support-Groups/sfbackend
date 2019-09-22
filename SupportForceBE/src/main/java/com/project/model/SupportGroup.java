@@ -1,11 +1,17 @@
 package com.project.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -21,25 +27,40 @@ public class SupportGroup {
 	@Column(name = "support_group_name", nullable = false)
 	private String supportGroupName;
 	
+	@ManyToMany(mappedBy = "supportGroups", fetch = FetchType.LAZY)
+	private List<User> supportGroupUsers = new ArrayList<>();
+	
 	@ManyToOne
 	@JoinColumn(name = "addict", referencedColumnName = "addiction_id")
 	private Addiction addict;
+	
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Post> postList;
+	
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Reply> replyList;
 	
 	public SupportGroup() {
 		super();
 	}
 	
-	public SupportGroup(String supportGroupName, Addiction addict) {
+	public SupportGroup(String supportGroupName, Addiction addict, List<Post> postList, List<Reply> replyList) {
 		super();
 		this.supportGroupName = supportGroupName;
 		this.addict = addict;
+		this.postList = postList;
+		this.replyList = replyList;
 	}
 
-	public SupportGroup(int supportGroupId, String supportGroupName, Addiction addict) {
+	public SupportGroup(int supportGroupId, String supportGroupName, List<User> supportGroupUsers, Addiction addict,
+			List<Post> postList, List<Reply> replyList) {
 		super();
 		this.supportGroupId = supportGroupId;
 		this.supportGroupName = supportGroupName;
+		this.supportGroupUsers = supportGroupUsers;
 		this.addict = addict;
+		this.postList = postList;
+		this.replyList = replyList;
 	}
 
 	public int getSupportGroupId() {
@@ -58,6 +79,14 @@ public class SupportGroup {
 		this.supportGroupName = supportGroupName;
 	}
 
+	public List<User> getSupportGroupUsers() {
+		return supportGroupUsers;
+	}
+
+	public void setSupportGroupUsers(List<User> supportGroupUsers) {
+		this.supportGroupUsers = supportGroupUsers;
+	}
+
 	public Addiction getAddict() {
 		return addict;
 	}
@@ -66,10 +95,27 @@ public class SupportGroup {
 		this.addict = addict;
 	}
 
+	public List<Post> getPostList() {
+		return postList;
+	}
+
+	public void setPostList(List<Post> postList) {
+		this.postList = postList;
+	}
+
+	public List<Reply> getReplyList() {
+		return replyList;
+	}
+
+	public void setReplyList(List<Reply> replyList) {
+		this.replyList = replyList;
+	}
+
 	@Override
 	public String toString() {
-		return "SupportGroup [supportGroupId=" + supportGroupId + ", supportGroupName=" + supportGroupName + ", addict="
-				+ addict + "]";
+		return "\nSupportGroup [supportGroupId=" + supportGroupId + ", supportGroupName=" + supportGroupName
+				+ ", supportGroupUsers=" + supportGroupUsers + ", addict=" + addict + ", postList=" + postList
+				+ ", replyList=" + replyList + "]";
 	}
 	
 }
