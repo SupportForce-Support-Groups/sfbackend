@@ -138,8 +138,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", email=" + email
-				+ ", addictions=" + addictions + ", supportGroups=" + supportGroups + ", posts=" + posts + ", replies="
+		return "\nUser [userId=" + userId + ", username=" + username + ", password=" + password + ", email=" + email
+				+ ", addictions=" + addictions + ", supportGroups=" + supportGroups.size() + ", posts=" + posts + ", replies="
 				+ replies + "]";
 	}
 

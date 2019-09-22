@@ -19,7 +19,7 @@ public class SupportGroupDao {
 		tx.commit();
 	}
 	
-	public List<SupportGroup> selectAllReplies() {
+	public List<SupportGroup> selectAllSupportGroups() {
 		Session ses = HibernateUtil.getSession();
 		
 		List<SupportGroup> supportGroupList = ses.createQuery("from SupportGroup", SupportGroup.class).list();
