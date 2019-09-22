@@ -85,6 +85,7 @@ public class MainDriver {
 		listReply.add(reply4);
 		listReply.add(reply6);
 		SupportGroup sg1 = new SupportGroup("Alcohol, Never Again", add1, listPost, listReply);
+		System.out.println(listReply);
 		listPost = new ArrayList<>();
 		listPost.add(post1);
 		listReply = new ArrayList<>();

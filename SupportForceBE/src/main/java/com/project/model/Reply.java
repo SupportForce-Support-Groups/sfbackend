@@ -68,7 +68,7 @@ public class Reply {
 
 	@Override
 	public String toString() {
-		return "\nReply [replyId=" + replyId + ", replyBody=" + replyBody + ", rpost=" + rpost.getPostBody() + "]";
+		return "Reply [replyId=" + replyId + ", replyBody=" + replyBody + ", rpost=" + rpost.getPostBody() + "]";
 	}
 
 }
