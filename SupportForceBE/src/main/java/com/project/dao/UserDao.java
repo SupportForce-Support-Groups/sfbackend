@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import com.project.model.SupportGroup;
 import com.project.model.User;
 import com.project.util.HibernateUtil;
 
@@ -31,4 +32,20 @@ public class UserDao {
 		return userList;
 	}
 	
+	public User selectById(int userId) {
+		Session ses = HibernateUtil.getSession();
+		
+		User user = ses.get(User.class, userId);
+		
+		return user;
+	}
+	
+	/*
+	 * public List<SupportGroup> selectSupportGroups(int userId) { Session ses =
+	 * HibernateUtil.getSession();
+	 * 
+	 * User user = selectById(userId);
+	 * 
+	 * List<SupportGroup> supportGroups = ses.get(User.class, supportGroups); }
+	 */
 }
