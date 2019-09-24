@@ -29,5 +29,4 @@ workflows:
       - buildbackend
       - deploy:
           requires:
-            - buildfrontend
             - buildbackend
