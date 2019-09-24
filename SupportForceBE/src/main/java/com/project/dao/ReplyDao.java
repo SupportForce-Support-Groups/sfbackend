@@ -26,5 +26,13 @@ public class ReplyDao {
 		
 		return replyList;
 	}
+	
+	public Reply selectById(int replyId) {
+		Session ses = HibernateUtil.getSession();
+		
+		Reply reply = ses.get(Reply.class, replyId);
+		
+		return reply;
+	}
 
 }

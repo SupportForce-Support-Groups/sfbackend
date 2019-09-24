@@ -15,6 +15,7 @@ import com.project.model.Post;
 import com.project.model.Reply;
 import com.project.model.SupportGroup;
 import com.project.model.User;
+import com.project.service.UserService;
 import com.project.util.HibernateUtil;
 
 public class MainDriver {
@@ -24,6 +25,7 @@ public class MainDriver {
 	public static PostDao pDao = new PostDao();
 	public static ReplyDao rDao = new ReplyDao();
 	public static SupportGroupDao sgDao = new SupportGroupDao();
+	public static UserService userServ = new UserService();
 	
 	public static void main(String[] args) {
 		insertInitialValues();
@@ -31,17 +33,34 @@ public class MainDriver {
 		System.out.println("These are a list of all addictions in the database: \n");
 		System.out.println(aDao.selectAllAddictions());
 		
+		System.out.println("This the addiction with the id of 5");
+		System.out.println(aDao.selectById(5));
+		
 		System.out.println("These are a list of all users in the database: \n");
 		System.out.println(uDao.selectAllUsers());
+		
+		System.out.println("This is the user with the id of 16.");
+		System.out.println(uDao.selectById(16));
 		
 		System.out.println("These are a list of all posts in the database: \n");
 		System.out.println(pDao.selectAllPosts());
 		
+		System.out.println("This is the post with the id of 8");
+		System.out.println(pDao.selectById(8));
+		
 		System.out.println("These are a list of all replies in the database: \n");
 		System.out.println(rDao.selectAllReplies());
 		
+		System.out.println("This is the reply with the id of 10");
+		System.out.println(rDao.selectById(10));
+		
 		System.out.println("These are a list of all support groups: \n");
 		System.out.println(sgDao.selectAllSupportGroups());
+		
+		System.out.println("This is the support group with an ID of 17");
+		System.out.println(sgDao.selectById(17));
+		
+		userServ.UserLogin("jyothi", "123");
 		
 		System.out.println("\nDone!");
 		HibernateUtil.closeSes();

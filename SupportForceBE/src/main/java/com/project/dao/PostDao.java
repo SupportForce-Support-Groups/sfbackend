@@ -27,4 +27,11 @@ public class PostDao {
 		return postList;
 	}
 
+	public Post selectById(int postId) {
+		Session ses = HibernateUtil.getSession();
+		
+		Post post = ses.get(Post.class, postId);
+		
+		return post;
+	}
 }
