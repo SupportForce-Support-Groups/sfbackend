@@ -1,0 +1,15 @@
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "tomcat-backend-service"
+  # namespace: "db-backend"
+  labels:
+    supportforceapp: "tomcat-backend"
+spec:
+  selector:
+    supportforceapp: "tomcat-backend"
+  type: "ClusterIP"
+  ports:
+  - protocol: "TCP"
+    port: 80
+    targetPort: 8080

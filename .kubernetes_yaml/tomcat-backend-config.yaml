@@ -1,0 +1,13 @@
+apiVersion: v1
+data:
+  DB_PASSWORD: password
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2019-09-24T01:34:12Z"
+  labels:
+    supportforceapp: tomcat-backend
+  name: tomcat-backend-config
+  namespace: db-backend
+  resourceVersion: "61662"
+  selfLink: /api/v1/namespaces/db-backend/configmaps/tomcat-backend-config
+  uid: 69a0fb6b-de6b-11e9-84e9-4201ac100003

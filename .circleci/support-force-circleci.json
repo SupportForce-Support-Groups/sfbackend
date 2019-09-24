@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "support-force",
+  "private_key_id": "ad62de5119fe655e09beab1f359d4b69c27998db",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDCwJS6DQluQBnI\nSEXuN0KPw3Gym0an7Ssyho4xD3btOtB3r1yBy31wKSnK7MU/VOGky04K7MoHbWgR\nzXCiaJszIs7EJSp+85q3uWDhv5NJiqubWbD87IYyqRzLPV6htDxyva/bV36llERA\nzO5ZgEwrlXb8g0zzG4wn3r/TH6yUJ8iqfayxbVgt1ebWVK8p8V4X4FNN9sxTqNlC\nnllIF7Clyoo+VlhKiil8F8MWXDl/4yIK8sdPdOdaqHNkUE0FOW166VgASzOlsKo2\nb4mz2PR0cmlaegld4k+ctGpHT3iVXyWjeRAK6yhBGpgnpvSMluwJh1RhXhTr50mq\nUceEsi4TAgMBAAECggEACHGWOAmtziNUMbHyxjvVZqtrfIxa6U6siRLWHa5r9wNp\ngCbsPdfSwnS4tt0Lao4X24s/Sh34XrPIfnY+pDUg2g5v//UUj3PyG1EbsDccJImM\nnFCIDnzxoSJiL8fshiNs7vALCCKobQlkVnUwtguMiwhZ7SzMLG9NCcM1LVi57ey0\n2+BgEdfzyCTrydiWqjMuQ09V+Zz5lztAc+eAevuzKmz1Exy1+rIV3Z3Pq0wHxpmf\n+4u2clBWcZSNbz3dtTwB6FiVu6ai7Klm5Mt94lECFARbQjeFNl69MKEl93b8U278\n0xKjHmwqwqK0se87ZFZrpCB7QUCq1/VphxYRRryo4QKBgQDgCLNFVOaUEi8vdJpL\nIVfwuIkDQB1FVqSB7ZAjooUZP1xTdi1J5WZ7Ko4IcLRFt/7GD/api/cRRbf3Ynr0\nomZ6OOy7c4ZJGpA3eAgioJ3n1bFzXTltKm9THSaqb+7ULyDaFP1EGL+brz9lCtjf\nMlIB/FGOwUHSbG9ulGX3xu716QKBgQDeik5cJOWbJPvMXoclDNW5Sqe+CiJym7B6\nUFlQh1yL4eBEukDlxt/TuN450EkTO1Hc6t9P5+WO3LumAp3+FqD8Y9F8vN9nZuEC\ncPbZzAAki28kZrJp4tS3GrgeJ5r90EiEXOBnOgcYbbzILQDHHHsGZS8IKmayG8YU\nSj0fSZi6mwKBgQCr9SGc4sjE+JwtIaPYbPRx+UJ5MzoEYbeNXsnXAESHF4IHMdsb\nMDAT85rnUZKdPNgaMGCUzLDMGiZVhMp5gTmFMLJMQyTccb4mRUSBR6VMMFKvCOwu\nJXcjZWmrQpUfWjkuCxRGs3RGzCGtrcC+uIIHsiLrntyl5cM2LkOCBrieGQKBgCxG\nmiaNFL2UUyCrIfpGHnOaHduaipYA0dDUEaEK/We7TfJ+mBDfS4MFQfmArjlMURJC\nDKIKQkr1McRquuJlwCvW9EP8E/qvpk7lCMf2ZYTf1QIKCK82eRnhEAa33IdpHDRx\nghgnnGfI1YmCIqh6yyNPmFbokLwY+ITq7FRAQUnHAoGANCo006q7NnLAr3K0M7Yf\ntueK9Jb1o626NE03zChPVz+oztr9761+YbBsnjYiJ9gBlFhgeic/ZiS6hsce2I60\nWkBjTY9QgKmtl0mb+yfU8RAeKWwui8w8uhb8rN0utCmwXHZHumrmjFfUZp/9yThS\nGmTnnO90M4eLfMe6SExaKrs=\n-----END PRIVATE KEY-----\n",
+  "client_email": "circleci-build-account@support-force.iam.gserviceaccount.com",
+  "client_id": "115210387386371618330",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/circleci-build-account%40support-force.iam.gserviceaccount.com"
+}
