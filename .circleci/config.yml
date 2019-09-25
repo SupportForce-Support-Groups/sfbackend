@@ -19,9 +19,11 @@ jobs:
     steps:
       ## install `gcloud` and `kubectl` if not already installed
       - gcp-gke/install
-      ## initialize the `gcloud` CLI
-      - gcp-gke/init
-      - run: echo $GCLOUD_SERVICE_KEY
+      ## initialize the `gcloud` and `kubetcl` CLI
+      ## - gcp-gke/init
+      - run: gcloud auth activate-service-account --key-file=.circleci/support-force-circleci.json
+      - run: gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+      - run: gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
       ## update a deployment docker image
       - run: gcloud container clusters get-credentials supportforce-cluster
       ## create supportforce-cluster deployment
