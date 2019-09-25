@@ -30,7 +30,7 @@ jobs:
       ## create supportforce-cluster deployment
       - run: kubectl apply -f SupportForceBE/.kubernetes_yaml/tomcat-backend-deployment.yaml
       ## update image
-      - run: kubetcl set image -f SupportForceBE/.kubernetes_yaml/tomcat-backend-deployment.yaml -l app=tomcat-backend
+      - run: kubectl set image -f SupportForceBE/.kubernetes_yaml/tomcat-backend-deployment.yaml -l app=tomcat-backend
       ## create supportforce-cluster service
       - run: kubectl apply -f SupportForceBE/.kubernetes_yaml/tomcat-backend-service.yaml
 workflows:
