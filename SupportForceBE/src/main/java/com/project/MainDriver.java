@@ -1,31 +1,44 @@
 package com.project;
 
-import java.util.ArrayList;
-import java.util.List;
-
-//import java.text.SimpleDateFormat;
-
 import com.project.dao.AddictionDao;
+import com.project.dao.AddictionDaoImpl;
 import com.project.dao.PostDao;
+import com.project.dao.PostDaoImpl;
 import com.project.dao.ReplyDao;
+import com.project.dao.ReplyDaoImpl;
 import com.project.dao.SupportGroupDao;
+import com.project.dao.SupportGroupDaoImpl;
 import com.project.dao.UserDao;
+import com.project.dao.UserDaoImpl;
 import com.project.model.Addiction;
 import com.project.model.Post;
 import com.project.model.Reply;
 import com.project.model.SupportGroup;
 import com.project.model.User;
+import com.project.service.AddictionService;
+import com.project.service.AddictionServiceImpl;
+import com.project.service.PostService;
+import com.project.service.PostServiceImpl;
+import com.project.service.ReplyService;
+import com.project.service.ReplyServiceImpl;
+import com.project.service.SupportGroupService;
+import com.project.service.SupportGroupServiceImpl;
 import com.project.service.UserService;
+import com.project.service.UserServiceImpl;
 import com.project.util.HibernateUtil;
 
 public class MainDriver {
 	
-	public static AddictionDao aDao = new AddictionDao();
-	public static UserDao uDao = new UserDao();
-	public static PostDao pDao = new PostDao();
-	public static ReplyDao rDao = new ReplyDao();
-	public static SupportGroupDao sgDao = new SupportGroupDao();
-	public static UserService userServ = new UserService();
+	public static AddictionDao aDao = new AddictionDaoImpl();
+	public static UserDao uDao = new UserDaoImpl();
+	public static PostDao pDao = new PostDaoImpl();
+	public static ReplyDao rDao = new ReplyDaoImpl();
+	public static SupportGroupDao sgDao = new SupportGroupDaoImpl();
+	public static UserService userServ = new UserServiceImpl();
+	public static AddictionService addictionServ = new AddictionServiceImpl();
+	public static PostService postServ = new PostServiceImpl();
+	public static ReplyService replyServ = new ReplyServiceImpl();
+	public static SupportGroupService supportGrpServ = new SupportGroupServiceImpl();
 	
 	public static void main(String[] args) {
 		insertInitialValues();
@@ -35,6 +48,9 @@ public class MainDriver {
 		
 		System.out.println("This the addiction with the id of 5");
 		System.out.println(aDao.selectById(5));
+		
+		System.out.println("This is the addiction with the id of 4");
+		System.out.println(addictionServ.getSpecificAddiction(4));
 		
 		System.out.println("These are a list of all users in the database: \n");
 		System.out.println(uDao.selectAllUsers());
@@ -60,7 +76,24 @@ public class MainDriver {
 		System.out.println("This is the support group with an ID of 17");
 		System.out.println(sgDao.selectById(17));
 		
-		userServ.UserLogin("jyothi", "123");
+		userServ.UserLogin("jyothi", "password");
+		
+		userServ.registerUser("Jason", "password", "jason.kim@gmail.com");
+		System.out.println("These are a list of all users in the database: \n");
+		System.out.println(uDao.selectAllUsers());
+		
+		postServ.creationPost("Hey, where is a good place I can start my path to soberity?");
+		System.out.println(postServ);
+		System.out.println("These are a list of all posts in the database: \n");
+		System.out.println(pDao.selectAllPosts());
+		
+		replyServ.creationReply("The first step is always admitting you have a problem. Congratulations you are already on route for soberity!", 21);
+		System.out.println("These are a list of all replies in the database: \n");
+		System.out.println(rDao.selectAllReplies());
+		
+		supportGrpServ.creationOfSupportGroup("Gambling Billionaries", 5);
+		System.out.println("These are a list of all support groups in the database: \n");
+		System.out.println(sgDao.selectAllSupportGroups());
 		
 		System.out.println("\nDone!");
 		HibernateUtil.closeSes();
@@ -95,47 +128,35 @@ public class MainDriver {
 		post2.getReplies().add(reply6);
 		
 		//SUPPORT GROUP
-		List<Post> listPost = new ArrayList<>();
-		listPost.add(post1);
-		listPost.add(post2);
-		List<Reply> listReply = new ArrayList<>();
-		listReply.add(reply1);
-		listReply.add(reply2);
-		listReply.add(reply4);
-		listReply.add(reply6);
-		SupportGroup sg1 = new SupportGroup("Alcohol, Never Again", add1, listPost, listReply);
-		System.out.println(listReply);
-		listPost = new ArrayList<>();
-		listPost.add(post1);
-		listReply = new ArrayList<>();
-		listReply.add(reply1);
-		listReply.add(reply2);
-		listReply.add(reply3);
-		SupportGroup sg2 = new SupportGroup("Cocaine, I Don't Need You Anyway", add7, listPost, listReply);
+		SupportGroup sg1 = new SupportGroup("Alcohol, Never Again", add1);
+		sg1.getPostList().add(post1);
+		sg1.getPostList().add(post2);
+		sg1.getReplyList().add(reply1);
+		sg1.getReplyList().add(reply2);
+		sg1.getReplyList().add(reply4);
+		sg1.getReplyList().add(reply6);
+		SupportGroup sg2 = new SupportGroup("Cocaine, I Don't Need You Anyway", add7);
+		sg2.getPostList().add(post1);
+		sg2.getReplyList().add(reply1);
+		sg2.getReplyList().add(reply2);
+		sg2.getReplyList().add(reply3);
+		
 		
 		//USERS
-		List<Addiction> addictionList = new ArrayList<>();
-		addictionList.add(add5);
-		addictionList.add(add1);
-		List<SupportGroup> supportGroupList = new ArrayList<>();
-		supportGroupList.add(sg1);
-		List<Post> postList = new ArrayList<>(); 
-		postList.add(post1);
-		List<Reply>replyList = new ArrayList<>();
-		replyList.add(reply3);
-		replyList.add(reply6);
-		User user1 = new User("jyothi", "password", "jyothi.thi@gmail.com", addictionList, supportGroupList, postList, replyList);
+		User user1 = new User("jyothi", "password", "jyothi.thi@gmail.com");
+		user1.getAddictions().add(add5);
+		user1.getAddictions().add(add1);
+		user1.getSupportGroups().add(sg1);
+		user1.getPosts().add(post1);
+		user1.getReplies().add(reply3);
+		user1.getReplies().add(reply6);
 		sg1.getSupportGroupUsers().add(user1);
-		addictionList = new ArrayList<>();
-		addictionList.add(add1);
-		addictionList.add(add3);
-		supportGroupList = new ArrayList<>();
-		supportGroupList.add(sg1);
-		postList = new ArrayList<>();
-		postList.add(post2);
-		replyList = new ArrayList<>();
-		replyList.add(reply1);
-		User user2 = new User("easley", "password", "easley.boo@gmail.com", addictionList, supportGroupList, postList, replyList);
+		User user2 = new User("easley", "password", "easley.boo@gmail.com");
+		user2.getAddictions().add(add1);
+		user2.getAddictions().add(add3);
+		user2.getSupportGroups().add(sg1);
+		user2.getPosts().add(post2);
+		user2.getReplies().add(reply1);
 		sg1.getSupportGroupUsers().add(user2);
 		
 		//INSERTS FOR ADDICTIONS
