@@ -6,12 +6,12 @@
 FROM maven:3.3.9-jdk-8-alpine as build
 
 ## environment variables
-ARG DB_PASSWORD
+ARG dockfoovars
 ENV DATABASE_NAME="postgres"
 # ENV DB_SCHEMA=""
 ENV DB_URL="35.236.247.30"
 ENV DB_USERNAME="postgres"
-ENV DB_PASSWORD=${DB_PASSWORD}
+ENV DB_PASSWORD=${dockfoovars}
 
 ## set up working directory
 COPY . /app
