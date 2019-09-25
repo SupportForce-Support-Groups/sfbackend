@@ -1,5 +1,6 @@
 package com.project.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -31,19 +32,26 @@ public class User {
 	private String email;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Addiction> addictions;
+	private List<Addiction> addictions = new ArrayList<>();
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<SupportGroup> supportGroups;
+	private List<SupportGroup> supportGroups = new ArrayList<>();
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Post> posts;
+	private List<Post> posts = new ArrayList<>();
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Reply> replies;
+	private List<Reply> replies = new ArrayList<>();
 
 	public User() {
 		super();
+	}
+	
+	public User(String username, String password, String email) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.email = email;
 	}
 
 	public User(String username, String password, String email, List<Addiction> addictions, List<SupportGroup> supportGroups,

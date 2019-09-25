@@ -91,7 +91,7 @@ public class Post {
 
 	@Override
 	public String toString() {
-		return "\nPost [postId=" + postId + ", postBody=" + postBody + ", replies=" + replies
+		return "\nPost [postId=" + postId + ", postBody=" + postBody + ", \nreplies=" + replies
 				+ "]";
 	}
 }

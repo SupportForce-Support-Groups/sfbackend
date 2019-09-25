@@ -1,5 +1,9 @@
 package com.project.service;
 
-public class AddictionService {
+import com.project.model.Addiction;
+
+public interface AddictionService {
+	
+	public Addiction getSpecificAddiction(int id);
 
 }
