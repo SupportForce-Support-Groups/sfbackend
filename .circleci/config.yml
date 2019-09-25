@@ -21,6 +21,7 @@ jobs:
       - gcp-gke/install
       ## initialize the `gcloud` and `kubetcl` CLI
       ## - gcp-gke/init
+      - run: ls -la
       - run: gcloud auth activate-service-account --key-file=.circleci/support-force-circleci.json
       - run: gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
       - run: gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
@@ -31,7 +32,7 @@ jobs:
       ## create supportforce-cluster service
       - run: kubectl apply -f SupportForceBE/.kubernetes_yaml/tomcat-backend-service.yaml
 workflows:
-  build_update_deploy:
+  buildbackend_deploy:
     jobs:
       - buildbackend
       - deploy:
