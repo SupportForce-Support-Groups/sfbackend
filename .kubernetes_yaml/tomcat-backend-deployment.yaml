@@ -6,12 +6,12 @@ metadata:
   # creationTimestamp: "2019-09-24T01:34:13Z"
   # generation: 1
   labels:
-    supportforceapp: tomcat-backend
+    supportforceapp: tomcat-backend-deployment
   name: tomcat-backend
-  # namespace: db-backend
-  # resourceVersion: "61805"
-  # selfLink: /apis/apps/v1/namespaces/db-backend/deployments/tomcat-backend
-  # uid: 69dc6af6-de6b-11e9-84e9-4201ac100003
+  # namespace: backend
+  resourceVersion: "61805"
+  selfLink: /apis/apps/v1/namespaces/db-backend/deployments/tomcat-backend
+  uid: 69dc6af6-de6b-11e9-84e9-4201ac100003
 spec:
   progressDeadlineSeconds: 600
   replicas: 3
@@ -28,16 +28,9 @@ spec:
     metadata:
       # creationTimestamp: null
       labels:
-        supportforceapp: tomcat-backend
+        supportforceapp: tomcat-backend-deployment
     spec:
-      containers:
-      - env:
-        - name: DB_PASSWORD
-          valueFrom:
-            configMapKeyRef:
-              key: DB_PASSWORD
-              name: tomcat-backend-config
-        image: gcr.io/support-force/supportforcebe:latest
+      - image: gcr.io/support-force/supportforcebe:latest
         imagePullPolicy: IfNotPresent
         name: supportforcebe
         resources: {}

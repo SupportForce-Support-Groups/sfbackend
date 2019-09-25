@@ -21,13 +21,14 @@ jobs:
       - gcp-gke/init
       ## update a deployment docker image
       - run: gcloud container clusters get-credentials supportforce-cluster
-      ## use yaml file instead...
-      - run: kubectl create deployment supportforce --image=gcr.io/support-force/supportforcebe:latest
+      ## create supportforce-cluster deployment
+      - run: kubectl apply -f .kubernetes_yaml/tomcat-backend-deployment.yaml
+      ## create supportforce-cluster service
+      - run: kubectl apply -f .kubernetes_yaml/tomcat-backend-service.yaml
 workflows:
   build_update_deploy:
     jobs:
       - buildbackend
       - deploy:
           requires:
-            - buildfrontend
             - buildbackend
