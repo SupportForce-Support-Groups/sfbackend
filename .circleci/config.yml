@@ -22,9 +22,9 @@ jobs:
       ## update a deployment docker image
       - run: gcloud container clusters get-credentials supportforce-cluster
       ## create supportforce-cluster deployment
-      - run: kubectl apply -f .kubernetes_yaml/tomcat-backend-deployment.yaml
+      - run: kubectl apply -f SupportForceBE/.kubernetes_yaml/tomcat-backend-deployment.yaml
       ## create supportforce-cluster service
-      - run: kubectl apply -f .kubernetes_yaml/tomcat-backend-service.yaml
+      - run: kubectl apply -f SupportForceBE/.kubernetes_yaml/tomcat-backend-service.yaml
 workflows:
   build_update_deploy:
     jobs:
