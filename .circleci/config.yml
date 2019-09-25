@@ -21,6 +21,7 @@ jobs:
       - gcp-gke/install
       ## initialize the `gcloud` CLI
       - gcp-gke/init
+      - run: echo $GCLOUD_SERVICE_KEY
       ## update a deployment docker image
       - run: gcloud container clusters get-credentials supportforce-cluster
       ## create supportforce-cluster deployment
