@@ -8,7 +8,7 @@ jobs:
     steps:
       - checkout
       ## build the application image
-      - run: docker build -f SupportForceBE/stagingbe.dockerfile --build-arg DB_PASSWORD=${DB_PASSWORD} -t ggcr.io/support-force/supportforcebe:latest .cr.io/support-force/supportforcebe:latest .
+      - run: docker build -f SupportForceBE/stagingbe.dockerfile --build-arg DB_PASSWORD=${DB_PASSWORD} -t gcr.io/support-force/supportforcebe:latest .
       ## push the image to container registry
       - run: docker push gcr.io/support-force/supportforcebe:latest
   deploy: ## deploy frontend to gcp kubernetes engine
