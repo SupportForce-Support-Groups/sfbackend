@@ -1,5 +1,6 @@
 package com.project.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,7 @@ public class SupportGroupServiceImpl implements SupportGroupService {
 		
 	}
 	
+	@Autowired
 	public SupportGroupServiceImpl(AddictionDaoImpl addictionDao, SupportGroupDaoImpl sgDao) {
 		this.addictionDao = addictionDao;
 		this.sgDao = sgDao;

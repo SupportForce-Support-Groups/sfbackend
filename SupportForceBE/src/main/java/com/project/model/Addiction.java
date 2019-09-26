@@ -13,7 +13,7 @@ public class Addiction {
 
 	@Id
 	@Column(name="addiction_id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int addictionId;
 	
 	@Column(name="addiction_name")

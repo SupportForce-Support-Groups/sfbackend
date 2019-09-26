@@ -2,6 +2,7 @@ package com.project.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,7 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	
+	@Autowired
 	public UserServiceImpl(UserDaoImpl userDao) {
 		this.userDao = userDao;
 	}
@@ -35,7 +37,7 @@ public class UserServiceImpl implements UserService {
 	//It will return the user object associated to the username and password.
 	@Override
 	public User UserLogin(String username, String password) {
-		List<User> users = userDao.selectAllUsers();
+		List<User> users = selectAllUsers();
 		
 		for(User user: users) {
 			if(user.getUsername().equals(username) && user.getPassword().equals(password)) {
@@ -47,22 +49,28 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 	
+	public List<User> selectAllUsers() {
+		
+		return userDao.selectAllUsers();
+		
+	}
+	
 	//This method will be able to register a user into the database.
 	//If the user inputs a username that already exists in the database. It will return null.
 	@Override
 	public User registerUser(String username, String password, String email) {
 		
-		try {
+		/* try { */
 			User newUser = new User(username, password, email);
 			
 			userDao.insert(newUser);
 			
 			return newUser;
 			
-		}catch(Exception e) {
+		/*}catch(Exception e) {
 			System.out.println("This username exists already. Please input a different user.");
 			return null;
-		}
+		}*/
 		
 		
 	}

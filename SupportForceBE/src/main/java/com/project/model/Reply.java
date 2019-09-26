@@ -15,7 +15,7 @@ public class Reply {
 	
 	@Id //Denotes the primary key for the table.
 	@Column(name = "reply_id") // Sets the column's name to "reply_id".
-	@GeneratedValue(strategy = GenerationType.AUTO) //Generates the value for the primary key(
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //Generates the value for the primary key(
 	private int replyId;
 	
 	@Column(name = "body", nullable = false)
