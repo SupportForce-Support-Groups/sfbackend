@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.project.model.Addiction;
 import com.project.model.Post;
-import com.project.util.HibernateUtil;
 
 @Transactional
 @EnableTransactionManagement(proxyTargetClass = true)

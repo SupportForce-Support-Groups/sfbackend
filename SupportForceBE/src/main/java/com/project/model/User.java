@@ -19,7 +19,7 @@ public class User {
 
 	@Id
 	@Column(name="user_id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
 
 	@Column(name = "username", unique = true, nullable = false)
@@ -147,8 +147,10 @@ public class User {
 	@Override
 	public String toString() {
 		return "\nUser [userId=" + userId + ", username=" + username + ", password=" + password + ", email=" + email
-				+ ", addictions=" + addictions + ", supportGroups=" + supportGroups.size() + ", posts=" + posts.size() + ", replies="
-				+ replies.size() + "]";
+				+ ", addictions=" + addictions + /*
+													 * ", supportGroups=" + supportGroups.size() + ", posts=" +
+													 * posts.size() + ", replies=" + replies.size() +
+													 */ "]";
 	}
 
 }

@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.project.model.Reply;
 import com.project.model.SupportGroup;
 import com.project.model.User;
-import com.project.util.HibernateUtil;
 
 @Transactional
 //@EnableTransactionManagement(proxyTargetClass = true)

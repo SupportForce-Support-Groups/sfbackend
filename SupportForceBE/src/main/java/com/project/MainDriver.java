@@ -3,7 +3,6 @@ package com.project;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.project.dao.AddictionDao;
 import com.project.dao.AddictionDaoImpl;
 import com.project.dao.PostDao;
 import com.project.dao.PostDaoImpl;
@@ -28,7 +27,6 @@ import com.project.service.SupportGroupService;
 import com.project.service.SupportGroupServiceImpl;
 import com.project.service.UserService;
 import com.project.service.UserServiceImpl;
-import com.project.util.HibernateUtil;
 
 public class MainDriver {
 	
@@ -77,17 +75,17 @@ public class MainDriver {
 		System.out.println(replyDao.selectAllReplies());
 		
 		System.out.println("This is the reply with the id of 10");
-		System.out.println(replyDao.selectById(10));
+		System.out.println(replyDao.selectById(6));
 		
 		
 		System.out.println("These are a list of all posts in the database: \n");
 		System.out.println(postDao.selectAllPosts());
 		
-		System.out.println("This is the post with the id of 8");
-		System.out.println(postDao.selectById(8));
+		System.out.println("This is the post with the id of 2");
+		System.out.println(postDao.selectById(2));
 		
 		postServ.creationPost("Hey, where is a good place I can start my path to soberity?");
-		replyServ.creationReply("The first step is always admitting you have a problem. Congratulations you are already on route for soberity!", 21);
+		replyServ.creationReply("The first step is always admitting you have a problem. Congratulations you are already on route for soberity!", 3);
 		System.out.println("These are a list of all replies in the database: \n");
 		System.out.println(replyServ.listOfAllReplies());
 		
@@ -98,8 +96,14 @@ public class MainDriver {
 		System.out.println("These are a list of all users in the database: \n");
 		System.out.println(userDao.selectAllUsers());
 		
-		System.out.println("This is the user with the id of 16.");
-		System.out.println(userDao.selectById(16));
+		System.out.println("This is the user with the id of 1: ");
+		System.out.println(userDao.selectById(1));
+		
+		userServ.registerUser("Jason", "password", "jason.kim@gmail.com");
+		System.out.println("These are a list of all users in the database: \n");
+		System.out.println(userServ.selectAllUsers());
+		
+		userServ.UserLogin("jyothi", "password");
 		
 		System.out.println("These are a list of all support groups: \n");
 		System.out.println(sgDao.selectAllSupportGroups());
@@ -107,18 +111,11 @@ public class MainDriver {
 		System.out.println("This is the support group with an ID of 17");
 		System.out.println(sgDao.selectById(17));
 		
-		userServ.UserLogin("jyothi", "password");
-		
-		userServ.registerUser("Jason", "password", "jason.kim@gmail.com");
-		System.out.println("These are a list of all users in the database: \n");
-		System.out.println(userDao.selectAllUsers());
-		
 		sgServ.creationOfSupportGroup("Gambling Billionaries", 5);
 		System.out.println("These are a list of all support groups in the database: \n");
 		System.out.println(sgDao.selectAllSupportGroups());
 		
 		System.out.println("\nDone!");
-		HibernateUtil.closeSes();
 	}
 	
 	public static void insertInitialValues() {

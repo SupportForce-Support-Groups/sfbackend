@@ -21,7 +21,7 @@ public class SupportGroup {
 	
 	@Id
 	@Column(name = "support_group_id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int supportGroupId;
 	
 	@Column(name = "support_group_name", nullable = false)
@@ -112,8 +112,10 @@ public class SupportGroup {
 	@Override
 	public String toString() {
 		return "\nSupportGroup [supportGroupId=" + supportGroupId + ", supportGroupName=" + supportGroupName
-				+ ", \nsupportGroupUsers=" + supportGroupUsers + ", addict=" + addict + ", \npostList=" + postList
-				+ ", \nreplyList=" + replyList + "]";
+		/*
+		 * + ", \nsupportGroupUsers=" + supportGroupUsers + ", addict=" + addict +
+		 * ", \npostList=" + postList + ", \nreplyList=" + replyList
+		 */ + "]";
 	}
 	
 }
