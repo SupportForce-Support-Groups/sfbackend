@@ -26,7 +26,7 @@ public class Post {
 	@Column(name = "body", nullable = false)
 	private String postBody;
 	
-	@OneToMany(mappedBy = "rpost", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "rpost", fetch = FetchType.EAGER)
 	private List<Reply> replies = new ArrayList<>();
 	
 	/*
