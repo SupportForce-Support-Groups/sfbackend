@@ -1,5 +1,8 @@
 package com.project;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.project.dao.AddictionDao;
 import com.project.dao.AddictionDaoImpl;
 import com.project.dao.PostDao;
@@ -29,46 +32,74 @@ import com.project.util.HibernateUtil;
 
 public class MainDriver {
 	
-	public static AddictionDao aDao = new AddictionDaoImpl();
-	public static UserDao uDao = new UserDaoImpl();
-	public static PostDao pDao = new PostDaoImpl();
-	public static ReplyDao rDao = new ReplyDaoImpl();
-	public static SupportGroupDao sgDao = new SupportGroupDaoImpl();
-	public static UserService userServ = new UserServiceImpl();
-	public static AddictionService addictionServ = new AddictionServiceImpl();
-	public static PostService postServ = new PostServiceImpl();
-	public static ReplyService replyServ = new ReplyServiceImpl();
-	public static SupportGroupService supportGrpServ = new SupportGroupServiceImpl();
+	public static ApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+	
+	public static AddictionDaoImpl addictionDao = appContext.getBean("addictionDao", AddictionDaoImpl.class);
+	public static AddictionServiceImpl addictionServ = appContext.getBean("addictionServ", AddictionServiceImpl.class);
+	public static PostDaoImpl postDao = appContext.getBean("postDao", PostDaoImpl.class);
+	public static PostServiceImpl postServ = appContext.getBean("postServ", PostServiceImpl.class);
+	public static ReplyDaoImpl replyDao = appContext.getBean("replyDao", ReplyDaoImpl.class);
+	public static ReplyServiceImpl replyServ = appContext.getBean("replyServ", ReplyServiceImpl.class);
+	public static SupportGroupDaoImpl sgDao = appContext.getBean("supportGroupDao", SupportGroupDaoImpl.class);
+	public static SupportGroupServiceImpl sgServ = appContext.getBean("supportGroupServ", SupportGroupServiceImpl.class);
+	public static UserDaoImpl userDao = appContext.getBean("userDao", UserDaoImpl.class);
+	public static UserServiceImpl userServ = appContext.getBean("userServ", UserServiceImpl.class);
+	
+	/*
+	 * public static AddictionDao aDao = new AddictionDaoImpl();*/
+	 //public static UserDao uDao = new UserDaoImpl(); 
+	 //public static PostDao pDao = new PostDaoImpl(); 
+	 //public static ReplyDao rDao = new ReplyDaoImpl(); 
+	 //public static SupportGroupDao sgDao = new SupportGroupDaoImpl(); 
+	 //public static UserService userServ = new UserServiceImpl(); 
+	 //public static AddictionService addictionServ = new AddictionServiceImpl(); 
+	 //public static PostService postServ = new PostServiceImpl(); 
+	 //public static ReplyService replyServ = new ReplyServiceImpl(); 
+	 //public static SupportGroupService supportGrpServ = new SupportGroupServiceImpl();
+	
 	
 	public static void main(String[] args) {
 		insertInitialValues();
 		
 		System.out.println("These are a list of all addictions in the database: \n");
-		System.out.println(aDao.selectAllAddictions());
+		System.out.println(addictionDao.selectAllAddictions());
 		
 		System.out.println("This the addiction with the id of 5");
-		System.out.println(aDao.selectById(5));
+		System.out.println(addictionDao.selectById(5));
 		
 		System.out.println("This is the addiction with the id of 4");
 		System.out.println(addictionServ.getSpecificAddiction(4));
 		
-		System.out.println("These are a list of all users in the database: \n");
-		System.out.println(uDao.selectAllUsers());
-		
-		System.out.println("This is the user with the id of 16.");
-		System.out.println(uDao.selectById(16));
-		
-		System.out.println("These are a list of all posts in the database: \n");
-		System.out.println(pDao.selectAllPosts());
-		
-		System.out.println("This is the post with the id of 8");
-		System.out.println(pDao.selectById(8));
+		System.out.println("This is a list of all addictions in the database: \n");
+		System.out.println(addictionServ.getListOfAddictions());
 		
 		System.out.println("These are a list of all replies in the database: \n");
-		System.out.println(rDao.selectAllReplies());
+		System.out.println(replyDao.selectAllReplies());
 		
 		System.out.println("This is the reply with the id of 10");
-		System.out.println(rDao.selectById(10));
+		System.out.println(replyDao.selectById(10));
+		
+		
+		System.out.println("These are a list of all posts in the database: \n");
+		System.out.println(postDao.selectAllPosts());
+		
+		System.out.println("This is the post with the id of 8");
+		System.out.println(postDao.selectById(8));
+		
+		postServ.creationPost("Hey, where is a good place I can start my path to soberity?");
+		replyServ.creationReply("The first step is always admitting you have a problem. Congratulations you are already on route for soberity!", 21);
+		System.out.println("These are a list of all replies in the database: \n");
+		System.out.println(replyServ.listOfAllReplies());
+		
+		System.out.println(postServ);
+		System.out.println("These are a list of all posts in the database: \n");
+		System.out.println(postDao.selectAllPosts());
+		
+		System.out.println("These are a list of all users in the database: \n");
+		System.out.println(userDao.selectAllUsers());
+		
+		System.out.println("This is the user with the id of 16.");
+		System.out.println(userDao.selectById(16));
 		
 		System.out.println("These are a list of all support groups: \n");
 		System.out.println(sgDao.selectAllSupportGroups());
@@ -80,18 +111,9 @@ public class MainDriver {
 		
 		userServ.registerUser("Jason", "password", "jason.kim@gmail.com");
 		System.out.println("These are a list of all users in the database: \n");
-		System.out.println(uDao.selectAllUsers());
+		System.out.println(userDao.selectAllUsers());
 		
-		postServ.creationPost("Hey, where is a good place I can start my path to soberity?");
-		System.out.println(postServ);
-		System.out.println("These are a list of all posts in the database: \n");
-		System.out.println(pDao.selectAllPosts());
-		
-		replyServ.creationReply("The first step is always admitting you have a problem. Congratulations you are already on route for soberity!", 21);
-		System.out.println("These are a list of all replies in the database: \n");
-		System.out.println(rDao.selectAllReplies());
-		
-		supportGrpServ.creationOfSupportGroup("Gambling Billionaries", 5);
+		sgServ.creationOfSupportGroup("Gambling Billionaries", 5);
 		System.out.println("These are a list of all support groups in the database: \n");
 		System.out.println(sgDao.selectAllSupportGroups());
 		
@@ -160,29 +182,29 @@ public class MainDriver {
 		sg1.getSupportGroupUsers().add(user2);
 		
 		//INSERTS FOR ADDICTIONS
-		aDao.insert(add1);
-		aDao.insert(add2);
-		aDao.insert(add3);
-		aDao.insert(add4);
-		aDao.insert(add5);
-		aDao.insert(add6);
-		aDao.insert(add7);
+		addictionDao.insert(add1);
+		addictionDao.insert(add2);
+		addictionDao.insert(add3);
+		addictionDao.insert(add4);
+		addictionDao.insert(add5);
+		addictionDao.insert(add6);
+		addictionDao.insert(add7);
 		
 		//INSERTS FOR POSTS
-		pDao.insert(post1);
-		pDao.insert(post2);
+		postDao.insert(post1);
+		postDao.insert(post2);
 		
 		//INSERTS FOR REPLIES
-		rDao.insert(reply1);
-		rDao.insert(reply2);
-		rDao.insert(reply3);
-		rDao.insert(reply4);
-		rDao.insert(reply5);
-		rDao.insert(reply6);
+		replyDao.insert(reply1);
+		replyDao.insert(reply2);
+		replyDao.insert(reply3);
+		replyDao.insert(reply4);
+		replyDao.insert(reply5);
+		replyDao.insert(reply6);
 		
 		//INSERTS FOR USERS
-		uDao.insert(user1);
-		uDao.insert(user2);
+		userDao.insert(user1);
+		userDao.insert(user2);
 		
 		//INSERTS FOR SUPPORT GROUPS
 		sgDao.insert(sg1);

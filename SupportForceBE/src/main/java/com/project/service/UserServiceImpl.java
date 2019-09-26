@@ -2,14 +2,35 @@ package com.project.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.project.dao.UserDao;
 import com.project.dao.UserDaoImpl;
 import com.project.model.User;
 
+@Transactional
+@Service("userServ")
 public class UserServiceImpl implements UserService {
 	
 	public static UserDao userDao = new UserDaoImpl();
 	
+	public UserServiceImpl() {
+		
+	}
+	
+	public UserServiceImpl(UserDaoImpl userDao) {
+		this.userDao = userDao;
+	}
+	
+	public static UserDao getUserDao() {
+		return userDao;
+	}
+
+	public static void setUserDao(UserDao userDao) {
+		UserServiceImpl.userDao = userDao;
+	}
+
 	//This method will check the login credentials that the user inputed into the fields from the Angular front end.
 	//It will return the user object associated to the username and password.
 	@Override

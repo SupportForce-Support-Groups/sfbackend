@@ -31,7 +31,7 @@ public class User {
 	@Column(name = "email", nullable = false)
 	private String email;
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Addiction> addictions = new ArrayList<>();
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -147,8 +147,8 @@ public class User {
 	@Override
 	public String toString() {
 		return "\nUser [userId=" + userId + ", username=" + username + ", password=" + password + ", email=" + email
-				+ ", addictions=" + addictions + ", supportGroups=" + supportGroups.size() + ", posts=" + posts + ", replies="
-				+ replies + "]";
+				+ ", addictions=" + addictions + ", supportGroups=" + supportGroups.size() + ", posts=" + posts.size() + ", replies="
+				+ replies.size() + "]";
 	}
 
 }
