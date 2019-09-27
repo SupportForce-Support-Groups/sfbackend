@@ -18,18 +18,18 @@
 	<tx:annotation-driven />
 
 	<!-- turn on SPRING MVC annotations -->
-	<!-- <mvc:annotation-driven /> -->
+	<mvc:annotation-driven />
 
 	<!-- DATA SOURCE: Spring ORM -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName"
 			value="org.postgresql.Driver" />
-		<property name="url" value="#{systemEnvironment['DBENDPOINT']}" />
+		<property name="url" value="#{systemEnvironment['DB_URL']}" />
 		<property name="username"
-			value="#{systemEnvironment['DBNAME']}" />
+			value="#{systemEnvironment['DB_NAME']}" />
 		<property name="password"
-			value="#{systemEnvironment['DBPASSWORD']}" />
+			value="#{systemEnvironment['DB_PASSWORD']}" />
 	</bean>
 
 	<!-- Session Factory: Spring ORM -->
@@ -42,7 +42,7 @@
 				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">false</prop>
-				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
 		</property>
 	</bean>
