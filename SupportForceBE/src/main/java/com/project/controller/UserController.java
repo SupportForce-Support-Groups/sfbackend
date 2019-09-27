@@ -1,11 +1,12 @@
 package com.project.controller;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -16,7 +17,7 @@ import com.project.service.UserServiceImpl;
 @Controller
 public class UserController {
 
-	private UserServiceImpl userServ;
+	private static UserServiceImpl userServ;
 
 	public UserController() {
 
@@ -27,12 +28,21 @@ public class UserController {
 		this.userServ = userServ;
 	}
 	
-	public static String login(HttpSession session) {
-		System.out.println("In the login method");
+	@PostMapping(value = "login")
+	public static @ResponseBody User login(HttpServletRequest request) {
+		System.out.println("Controller: In the login method");
 		
-		session.setAttribute("currentUserName", "jyothi");
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
 		
-		return null;
+		User user = userServ.UserLogin(username, password);
+		
+		if(user == null) {
+			return null;
+		} else {
+			request.getSession().setAttribute("loggeduser", user);
+			return user;
+		}
 		
 	}
 	/*
@@ -47,13 +57,32 @@ public class UserController {
 	 * }
 	 */
 	 
-
-
 	@PostMapping(value="register")
-	public @ResponseBody User register(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("email") String email) {
-
-		return userServ.registerUser(username, password, email);
-
+	public @ResponseBody Object register(@RequestBody User json) {
+		System.out.println("Controller: In the register method.");
+		
+		System.out.println(json);
+		
+		User user = new User();
+		
+		user.setUsername(json.getUsername());
+		user.setPassword(json.getPassword());
+		user.setEmail(json.getEmail());
+		
+		return userServ.registerUser(user.getUsername(), user.getPassword(), user.getEmail());
 	}
+
+	/*
+	 * @PostMapping(value="register") public @ResponseBody User
+	 * register(@RequestBody String username, @RequestBody String
+	 * password, @RequestBody String email) {
+	 * 
+	 * System.out.println(username); System.out.println(password);
+	 * System.out.println(email);
+	 * 
+	 * return userServ.registerUser(username, password, email);
+	 * 
+	 * }
+	 */
 
 }
