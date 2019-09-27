@@ -17,7 +17,7 @@ spec:
         app: "tomcat-backend"
     spec:
       containers:
-      - name: "supportforcebe-sha256"
+      - name: "supportforce-tomcat-backend"
         image: "gcr.io/support-force/supportforcebe:latest"
 ---
 apiVersion: "autoscaling/v2beta1"

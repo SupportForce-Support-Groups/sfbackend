@@ -8,7 +8,7 @@ metadata:
   labels:
     supportforceapp: "tomcat-backend-service"
   name: "tomcat-backend-service"
-  # namespace: backend
+  namespace: "backend"
   # resourceVersion: "1803"
   # selfLink: /api/v1/namespaces/default/services/tomcat-backend-service
   # uid: 92b3e3ff-de80-11e9-8dd4-42010a9600d1
@@ -19,8 +19,8 @@ spec:
     protocol: "TCP"
     targetPort: 8080
   selector:
-    supportforceapp: "tomcat-backend-deployment"
+    app: "tomcat-backend"
   sessionAffinity: "None"
   type: "ClusterIP"
-status:
-  loadBalancer: {}
+# status:
+#   loadBalancer: {}

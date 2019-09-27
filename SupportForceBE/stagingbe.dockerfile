@@ -3,13 +3,14 @@
 #######################
 
 ## base image
-FROM maven:3.3.9-jdk-8-alpine as build
+FROM maven:latest as build
 
 ## environment variables
 ARG dockfoovars
 ENV DATABASE_NAME="postgres"
 # ENV DB_SCHEMA=""
 ENV DB_URL="35.236.247.30"
+ENV DB_NAME="postgres"
 ENV DB_USERNAME="postgres"
 ENV DB_PASSWORD=${dockfoovars}
 
