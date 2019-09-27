@@ -3,29 +3,21 @@ package com.project;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.project.controller.UserController;
 import com.project.dao.AddictionDaoImpl;
-import com.project.dao.PostDao;
 import com.project.dao.PostDaoImpl;
-import com.project.dao.ReplyDao;
 import com.project.dao.ReplyDaoImpl;
-import com.project.dao.SupportGroupDao;
 import com.project.dao.SupportGroupDaoImpl;
-import com.project.dao.UserDao;
 import com.project.dao.UserDaoImpl;
 import com.project.model.Addiction;
 import com.project.model.Post;
 import com.project.model.Reply;
 import com.project.model.SupportGroup;
 import com.project.model.User;
-import com.project.service.AddictionService;
 import com.project.service.AddictionServiceImpl;
-import com.project.service.PostService;
 import com.project.service.PostServiceImpl;
-import com.project.service.ReplyService;
 import com.project.service.ReplyServiceImpl;
-import com.project.service.SupportGroupService;
 import com.project.service.SupportGroupServiceImpl;
-import com.project.service.UserService;
 import com.project.service.UserServiceImpl;
 
 public class MainDriver {
@@ -42,6 +34,7 @@ public class MainDriver {
 	public static SupportGroupServiceImpl sgServ = appContext.getBean("supportGroupServ", SupportGroupServiceImpl.class);
 	public static UserDaoImpl userDao = appContext.getBean("userDao", UserDaoImpl.class);
 	public static UserServiceImpl userServ = appContext.getBean("userServ", UserServiceImpl.class);
+	//public static UserController userController = appContext.getBean("userController", UserController.class);
 	
 	/*
 	 * public static AddictionDao aDao = new AddictionDaoImpl();*/
@@ -108,8 +101,8 @@ public class MainDriver {
 		System.out.println("These are a list of all support groups: \n");
 		System.out.println(sgDao.selectAllSupportGroups());
 		
-		System.out.println("This is the support group with an ID of 17");
-		System.out.println(sgDao.selectById(17));
+		System.out.println("This is the support group with an ID of 1");
+		System.out.println(sgDao.selectById(1));
 		
 		sgServ.creationOfSupportGroup("Gambling Billionaries", 5);
 		System.out.println("These are a list of all support groups in the database: \n");

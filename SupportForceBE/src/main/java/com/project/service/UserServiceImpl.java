@@ -60,17 +60,17 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User registerUser(String username, String password, String email) {
 		
-		/* try { */
+		try {
 			User newUser = new User(username, password, email);
 			
 			userDao.insert(newUser);
 			
 			return newUser;
 			
-		/*}catch(Exception e) {
+		}catch(Exception e) {
 			System.out.println("This username exists already. Please input a different user.");
 			return null;
-		}*/
+		}
 		
 		
 	}
