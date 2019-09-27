@@ -3,7 +3,7 @@
 #######################
 
 ## base image
-FROM maven:3.3.9-jdk-8-alpine as build
+FROM maven:latest as build
 
 ## environment variables
 ARG dockfoovars
