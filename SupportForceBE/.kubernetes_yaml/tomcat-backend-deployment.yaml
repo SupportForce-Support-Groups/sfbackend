@@ -17,16 +17,17 @@ spec:
         app: "tomcat-backend"
     spec:
       containers:
-      - name: "supportforce-tomcat-backend"
+      - name: "tomcat-backend-containers"
         image: "gcr.io/support-force/supportforcebe:latest"
 ---
+## autoscaler is not needed in staging, but it works for production
 apiVersion: "autoscaling/v2beta1"
 kind: "HorizontalPodAutoscaler"
 metadata:
   name: "tomcat-backend-hpa"
   namespace: "backend"
   labels:
-    app: "tomcat-backend"
+    app: "tomcat-backend-hpa"
 spec:
   scaleTargetRef:
     kind: "Deployment"

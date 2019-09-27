@@ -20,18 +20,20 @@ jobs:
       - checkout
       ## install `gcloud` and `kubectl` if not already installed
       - gcp-gke/install
-      ## initialize the `gcloud` and `kubetcl` CLI
+      # ## initialize the `gcloud` and `kubetcl` CLI
       # - gcp-gke/init
       - run: gcloud auth activate-service-account --key-file=.circleci/support-force-circleci.json
       - run: gcloud --quiet config set project support-force
       - run: gcloud --quiet config set compute/zone us-east4-a
       ## update a deployment docker image
       - run: gcloud container clusters get-credentials supportforce-cluster
-      ## create supportforce-cluster deployment
+      ## add namespaces (if not already added)
+      - run: kubectl apply -f SupportForceBE/.kubernetes_yaml/tomcat-backend-namespace.yaml
+      ## delete current deployment if one is running
+      - run: kubectl delete deployments --all --namespace backend
+      ## create anew a supportforce-cluster deployment (and autoscaler if not already running)
       - run: kubectl apply -f SupportForceBE/.kubernetes_yaml/tomcat-backend-deployment.yaml
-      ## update image
-      - run: kubectl set image deployment --all backend=gcr.io/support-force/supportforcebe:latest
-      ## create supportforce-cluster service
+      ## create supportforce-cluster service if not already running
       - run: kubectl apply -f SupportForceBE/.kubernetes_yaml/tomcat-backend-service.yaml
 workflows:
   buildbackend_deploy:
