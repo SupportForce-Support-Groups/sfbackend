@@ -1,5 +1,6 @@
 package com.project.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,7 +19,7 @@ public class User {
 
 	@Id
 	@Column(name="user_id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
 
 	@Column(name = "username", unique = true, nullable = false)
@@ -30,20 +31,27 @@ public class User {
 	@Column(name = "email", nullable = false)
 	private String email;
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Addiction> addictions;
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<Addiction> addictions = new ArrayList<>();
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<SupportGroup> supportGroups;
+	private List<SupportGroup> supportGroups = new ArrayList<>();
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Post> posts;
+	private List<Post> posts = new ArrayList<>();
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Reply> replies;
+	private List<Reply> replies = new ArrayList<>();
 
 	public User() {
 		super();
+	}
+	
+	public User(String username, String password, String email) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.email = email;
 	}
 
 	public User(String username, String password, String email, List<Addiction> addictions, List<SupportGroup> supportGroups,
@@ -139,8 +147,10 @@ public class User {
 	@Override
 	public String toString() {
 		return "\nUser [userId=" + userId + ", username=" + username + ", password=" + password + ", email=" + email
-				+ ", addictions=" + addictions + ", supportGroups=" + supportGroups.size() + ", posts=" + posts + ", replies="
-				+ replies + "]";
+				+ ", addictions=" + addictions + /*
+													 * ", supportGroups=" + supportGroups.size() + ", posts=" +
+													 * posts.size() + ", replies=" + replies.size() +
+													 */ "]";
 	}
 
 }

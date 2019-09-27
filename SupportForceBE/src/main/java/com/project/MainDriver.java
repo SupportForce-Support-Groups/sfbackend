@@ -1,50 +1,114 @@
 package com.project;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-//import java.text.SimpleDateFormat;
-
-import com.project.dao.AddictionDao;
-import com.project.dao.PostDao;
-import com.project.dao.ReplyDao;
-import com.project.dao.SupportGroupDao;
-import com.project.dao.UserDao;
+import com.project.controller.UserController;
+import com.project.dao.AddictionDaoImpl;
+import com.project.dao.PostDaoImpl;
+import com.project.dao.ReplyDaoImpl;
+import com.project.dao.SupportGroupDaoImpl;
+import com.project.dao.UserDaoImpl;
 import com.project.model.Addiction;
 import com.project.model.Post;
 import com.project.model.Reply;
 import com.project.model.SupportGroup;
 import com.project.model.User;
-import com.project.util.HibernateUtil;
+import com.project.service.AddictionServiceImpl;
+import com.project.service.PostServiceImpl;
+import com.project.service.ReplyServiceImpl;
+import com.project.service.SupportGroupServiceImpl;
+import com.project.service.UserServiceImpl;
 
 public class MainDriver {
 	
-	public static AddictionDao aDao = new AddictionDao();
-	public static UserDao uDao = new UserDao();
-	public static PostDao pDao = new PostDao();
-	public static ReplyDao rDao = new ReplyDao();
-	public static SupportGroupDao sgDao = new SupportGroupDao();
+	public static ApplicationContext appContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+	
+	public static AddictionDaoImpl addictionDao = appContext.getBean("addictionDao", AddictionDaoImpl.class);
+	public static AddictionServiceImpl addictionServ = appContext.getBean("addictionServ", AddictionServiceImpl.class);
+	public static PostDaoImpl postDao = appContext.getBean("postDao", PostDaoImpl.class);
+	public static PostServiceImpl postServ = appContext.getBean("postServ", PostServiceImpl.class);
+	public static ReplyDaoImpl replyDao = appContext.getBean("replyDao", ReplyDaoImpl.class);
+	public static ReplyServiceImpl replyServ = appContext.getBean("replyServ", ReplyServiceImpl.class);
+	public static SupportGroupDaoImpl sgDao = appContext.getBean("supportGroupDao", SupportGroupDaoImpl.class);
+	public static SupportGroupServiceImpl sgServ = appContext.getBean("supportGroupServ", SupportGroupServiceImpl.class);
+	public static UserDaoImpl userDao = appContext.getBean("userDao", UserDaoImpl.class);
+	public static UserServiceImpl userServ = appContext.getBean("userServ", UserServiceImpl.class);
+	//public static UserController userController = appContext.getBean("userController", UserController.class);
+	
+	/*
+	 * public static AddictionDao aDao = new AddictionDaoImpl();*/
+	 //public static UserDao uDao = new UserDaoImpl(); 
+	 //public static PostDao pDao = new PostDaoImpl(); 
+	 //public static ReplyDao rDao = new ReplyDaoImpl(); 
+	 //public static SupportGroupDao sgDao = new SupportGroupDaoImpl(); 
+	 //public static UserService userServ = new UserServiceImpl(); 
+	 //public static AddictionService addictionServ = new AddictionServiceImpl(); 
+	 //public static PostService postServ = new PostServiceImpl(); 
+	 //public static ReplyService replyServ = new ReplyServiceImpl(); 
+	 //public static SupportGroupService supportGrpServ = new SupportGroupServiceImpl();
+	
 	
 	public static void main(String[] args) {
 		insertInitialValues();
 		
 		System.out.println("These are a list of all addictions in the database: \n");
-		System.out.println(aDao.selectAllAddictions());
+		System.out.println(addictionDao.selectAllAddictions());
 		
-		System.out.println("These are a list of all users in the database: \n");
-		System.out.println(uDao.selectAllUsers());
+		System.out.println("This the addiction with the id of 5");
+		System.out.println(addictionDao.selectById(5));
 		
-		System.out.println("These are a list of all posts in the database: \n");
-		System.out.println(pDao.selectAllPosts());
+		System.out.println("This is the addiction with the id of 4");
+		System.out.println(addictionServ.getSpecificAddiction(4));
+		
+		System.out.println("This is a list of all addictions in the database: \n");
+		System.out.println(addictionServ.getListOfAddictions());
 		
 		System.out.println("These are a list of all replies in the database: \n");
-		System.out.println(rDao.selectAllReplies());
+		System.out.println(replyDao.selectAllReplies());
+		
+		System.out.println("This is the reply with the id of 10");
+		System.out.println(replyDao.selectById(6));
+		
+		
+		System.out.println("These are a list of all posts in the database: \n");
+		System.out.println(postDao.selectAllPosts());
+		
+		System.out.println("This is the post with the id of 2");
+		System.out.println(postDao.selectById(2));
+		
+		postServ.creationPost("Hey, where is a good place I can start my path to soberity?");
+		replyServ.creationReply("The first step is always admitting you have a problem. Congratulations you are already on route for soberity!", 3);
+		System.out.println("These are a list of all replies in the database: \n");
+		System.out.println(replyServ.listOfAllReplies());
+		
+		System.out.println(postServ);
+		System.out.println("These are a list of all posts in the database: \n");
+		System.out.println(postDao.selectAllPosts());
+		
+		System.out.println("These are a list of all users in the database: \n");
+		System.out.println(userDao.selectAllUsers());
+		
+		System.out.println("This is the user with the id of 1: ");
+		System.out.println(userDao.selectById(1));
+		
+		userServ.registerUser("Jason", "password", "jason.kim@gmail.com");
+		System.out.println("These are a list of all users in the database: \n");
+		System.out.println(userServ.selectAllUsers());
+		
+		userServ.UserLogin("jyothi", "password");
 		
 		System.out.println("These are a list of all support groups: \n");
 		System.out.println(sgDao.selectAllSupportGroups());
 		
+		System.out.println("This is the support group with an ID of 1");
+		System.out.println(sgDao.selectById(1));
+		
+		sgServ.creationOfSupportGroup("Gambling Billionaries", 5);
+		System.out.println("These are a list of all support groups in the database: \n");
+		System.out.println(sgDao.selectAllSupportGroups());
+		
 		System.out.println("\nDone!");
-		HibernateUtil.closeSes();
 	}
 	
 	public static void insertInitialValues() {
@@ -76,73 +140,61 @@ public class MainDriver {
 		post2.getReplies().add(reply6);
 		
 		//SUPPORT GROUP
-		List<Post> listPost = new ArrayList<>();
-		listPost.add(post1);
-		listPost.add(post2);
-		List<Reply> listReply = new ArrayList<>();
-		listReply.add(reply1);
-		listReply.add(reply2);
-		listReply.add(reply4);
-		listReply.add(reply6);
-		SupportGroup sg1 = new SupportGroup("Alcohol, Never Again", add1, listPost, listReply);
-		System.out.println(listReply);
-		listPost = new ArrayList<>();
-		listPost.add(post1);
-		listReply = new ArrayList<>();
-		listReply.add(reply1);
-		listReply.add(reply2);
-		listReply.add(reply3);
-		SupportGroup sg2 = new SupportGroup("Cocaine, I Don't Need You Anyway", add7, listPost, listReply);
+		SupportGroup sg1 = new SupportGroup("Alcohol, Never Again", add1);
+		sg1.getPostList().add(post1);
+		sg1.getPostList().add(post2);
+		sg1.getReplyList().add(reply1);
+		sg1.getReplyList().add(reply2);
+		sg1.getReplyList().add(reply4);
+		sg1.getReplyList().add(reply6);
+		SupportGroup sg2 = new SupportGroup("Cocaine, I Don't Need You Anyway", add7);
+		sg2.getPostList().add(post1);
+		sg2.getReplyList().add(reply1);
+		sg2.getReplyList().add(reply2);
+		sg2.getReplyList().add(reply3);
+		
 		
 		//USERS
-		List<Addiction> addictionList = new ArrayList<>();
-		addictionList.add(add5);
-		addictionList.add(add1);
-		List<SupportGroup> supportGroupList = new ArrayList<>();
-		supportGroupList.add(sg1);
-		List<Post> postList = new ArrayList<>(); 
-		postList.add(post1);
-		List<Reply>replyList = new ArrayList<>();
-		replyList.add(reply3);
-		replyList.add(reply6);
-		User user1 = new User("jyothi", "password", "jyothi.thi@gmail.com", addictionList, supportGroupList, postList, replyList);
+		User user1 = new User("jyothi", "password", "jyothi.thi@gmail.com");
+		user1.getAddictions().add(add5);
+		user1.getAddictions().add(add1);
+		user1.getSupportGroups().add(sg1);
+		user1.getPosts().add(post1);
+		user1.getReplies().add(reply3);
+		user1.getReplies().add(reply6);
 		sg1.getSupportGroupUsers().add(user1);
-		addictionList = new ArrayList<>();
-		addictionList.add(add1);
-		addictionList.add(add3);
-		supportGroupList = new ArrayList<>();
-		supportGroupList.add(sg1);
-		postList = new ArrayList<>();
-		postList.add(post2);
-		replyList = new ArrayList<>();
-		replyList.add(reply1);
-		User user2 = new User("easley", "password", "easley.boo@gmail.com", addictionList, supportGroupList, postList, replyList);
+		User user2 = new User("easley", "password", "easley.boo@gmail.com");
+		user2.getAddictions().add(add1);
+		user2.getAddictions().add(add3);
+		user2.getSupportGroups().add(sg1);
+		user2.getPosts().add(post2);
+		user2.getReplies().add(reply1);
 		sg1.getSupportGroupUsers().add(user2);
 		
 		//INSERTS FOR ADDICTIONS
-		aDao.insert(add1);
-		aDao.insert(add2);
-		aDao.insert(add3);
-		aDao.insert(add4);
-		aDao.insert(add5);
-		aDao.insert(add6);
-		aDao.insert(add7);
+		addictionDao.insert(add1);
+		addictionDao.insert(add2);
+		addictionDao.insert(add3);
+		addictionDao.insert(add4);
+		addictionDao.insert(add5);
+		addictionDao.insert(add6);
+		addictionDao.insert(add7);
 		
 		//INSERTS FOR POSTS
-		pDao.insert(post1);
-		pDao.insert(post2);
+		postDao.insert(post1);
+		postDao.insert(post2);
 		
 		//INSERTS FOR REPLIES
-		rDao.insert(reply1);
-		rDao.insert(reply2);
-		rDao.insert(reply3);
-		rDao.insert(reply4);
-		rDao.insert(reply5);
-		rDao.insert(reply6);
+		replyDao.insert(reply1);
+		replyDao.insert(reply2);
+		replyDao.insert(reply3);
+		replyDao.insert(reply4);
+		replyDao.insert(reply5);
+		replyDao.insert(reply6);
 		
 		//INSERTS FOR USERS
-		uDao.insert(user1);
-		uDao.insert(user2);
+		userDao.insert(user1);
+		userDao.insert(user2);
 		
 		//INSERTS FOR SUPPORT GROUPS
 		sgDao.insert(sg1);

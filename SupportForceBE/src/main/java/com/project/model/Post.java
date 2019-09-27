@@ -20,13 +20,13 @@ public class Post {
 	
 	@Id
 	@Column(name = "post_id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int postId;
 	
 	@Column(name = "body", nullable = false)
 	private String postBody;
 	
-	@OneToMany(mappedBy = "rpost", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "rpost", fetch = FetchType.EAGER)
 	private List<Reply> replies = new ArrayList<>();
 	
 	/*
@@ -91,7 +91,7 @@ public class Post {
 
 	@Override
 	public String toString() {
-		return "\nPost [postId=" + postId + ", postBody=" + postBody + ", replies=" + replies
+		return "\nPost [postId=" + postId + ", postBody=" + postBody + ", \nreplies=" + replies
 				+ "]";
 	}
 }

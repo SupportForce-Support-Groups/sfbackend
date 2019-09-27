@@ -9,13 +9,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "reply")
+@Entity //A marker annotation, which is used to discover persistent entities.
+@Table(name = "reply") //Annotation to map an entity to another table.
 public class Reply {
 	
-	@Id
-	@Column(name = "reply_id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id //Denotes the primary key for the table.
+	@Column(name = "reply_id") // Sets the column's name to "reply_id".
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //Generates the value for the primary key(
 	private int replyId;
 	
 	@Column(name = "body", nullable = false)
@@ -68,7 +68,7 @@ public class Reply {
 
 	@Override
 	public String toString() {
-		return "Reply [replyId=" + replyId + ", replyBody=" + replyBody + ", rpost=" + rpost.getPostBody() + "]";
+		return "\nReply [replyId=" + replyId + ", replyBody=" + replyBody  + ", rpost=" + rpost.getPostBody()  + "]";
 	}
 
 }

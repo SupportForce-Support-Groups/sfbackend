@@ -2,29 +2,14 @@ package com.project.dao;
 
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
 import com.project.model.Reply;
-import com.project.util.HibernateUtil;
 
-public class ReplyDao {
+public interface ReplyDao {
 	
-	public void insert(Reply myReply) {
-		Session ses = HibernateUtil.getSession();
-		Transaction tx = ses.beginTransaction();
-		
-		ses.save(myReply);
-		
-		tx.commit();
-	}
+	public void insert(Reply myReply);
 	
-	public List<Reply> selectAllReplies() {
-		Session ses = HibernateUtil.getSession();
-		
-		List<Reply> replyList = ses.createQuery("from Reply", Reply.class).list();
-		
-		return replyList;
-	}
+	public List<Reply> selectAllReplies();
+	
+	public Reply selectById(int replyId);
 
 }

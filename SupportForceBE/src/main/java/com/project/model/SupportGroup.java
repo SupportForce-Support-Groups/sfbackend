@@ -21,7 +21,7 @@ public class SupportGroup {
 	
 	@Id
 	@Column(name = "support_group_id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int supportGroupId;
 	
 	@Column(name = "support_group_name", nullable = false)
@@ -35,21 +35,19 @@ public class SupportGroup {
 	private Addiction addict;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Post> postList;
+	private List<Post> postList = new ArrayList<>();
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Reply> replyList;
+	private List<Reply> replyList = new ArrayList<>();
 	
 	public SupportGroup() {
 		super();
 	}
 	
-	public SupportGroup(String supportGroupName, Addiction addict, List<Post> postList, List<Reply> replyList) {
+	public SupportGroup(String supportGroupName, Addiction addict) {
 		super();
 		this.supportGroupName = supportGroupName;
 		this.addict = addict;
-		this.postList = postList;
-		this.replyList = replyList;
 	}
 
 	public SupportGroup(int supportGroupId, String supportGroupName, List<User> supportGroupUsers, Addiction addict,
@@ -114,8 +112,10 @@ public class SupportGroup {
 	@Override
 	public String toString() {
 		return "\nSupportGroup [supportGroupId=" + supportGroupId + ", supportGroupName=" + supportGroupName
-				+ ", supportGroupUsers=" + supportGroupUsers + ", addict=" + addict + ", postList=" + postList
-				+ ", replyList=" + replyList + "]";
+		/*
+		 * + ", \nsupportGroupUsers=" + supportGroupUsers + ", addict=" + addict +
+		 * ", \npostList=" + postList + ", \nreplyList=" + replyList
+		 */ + "]";
 	}
 	
 }
