@@ -24,7 +24,6 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: "dev-db-secret"
-                namespace: "backend"
                 key: "foopa"
 ---
 ## autoscaler is not needed in staging, but it works for production

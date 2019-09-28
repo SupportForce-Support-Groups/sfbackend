@@ -17,7 +17,6 @@ COPY . /app
 WORKDIR /app/SupportForceBE
 
 ## build files
-RUN echo ${DB_PASSWORD}
 RUN mvn install
 
 
