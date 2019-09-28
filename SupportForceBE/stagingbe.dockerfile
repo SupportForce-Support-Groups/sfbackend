@@ -8,7 +8,7 @@ FROM maven:latest as build
 ## environment variables
 ENV DB_NAME="postgres"
 # ENV DB_SCHEMA=""
-ENV DB_URL="35.236.247.30:5432"
+ENV DB_URL="10.0.160.3:5432"
 ENV DB_USERNAME="postgres"
 # ENV DB_PASSWORD=""
 
