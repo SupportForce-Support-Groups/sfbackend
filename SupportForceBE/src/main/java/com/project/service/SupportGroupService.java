@@ -11,5 +11,7 @@ public interface SupportGroupService {
 	public List<SupportGroup> selectAllSupportGroups();
 	
 	public List<SupportGroup> selectUserSupportGroups(int userId);
+	
+	public SupportGroup joinSupportGroup(int sgId, int userid);
 
 }
