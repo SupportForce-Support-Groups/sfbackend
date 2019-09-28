@@ -46,17 +46,6 @@ public class UserController {
 		}
 		
 	}
-	/*
-	 * @PostMapping(value="login")
-	
-	/*
-	 * public @ResponseBody User login(@RequestBody String username, @RequestBody
-	 * String password) {
-	 * 
-	 * return userServ.UserLogin(username, password);
-	 * 
-	 * }
-	 */
 	 
 	@PostMapping(value="register")
 	public @ResponseBody Object register(@RequestBody User json) {
@@ -72,18 +61,5 @@ public class UserController {
 		
 		return userServ.registerUser(user.getUsername(), user.getPassword(), user.getEmail());
 	}
-
-	/*
-	 * @PostMapping(value="register") public @ResponseBody User
-	 * register(@RequestBody String username, @RequestBody String
-	 * password, @RequestBody String email) {
-	 * 
-	 * System.out.println(username); System.out.println(password);
-	 * System.out.println(email);
-	 * 
-	 * return userServ.registerUser(username, password, email);
-	 * 
-	 * }
-	 */
 
 }
