@@ -10,6 +10,6 @@ public interface SupportGroupService {
 	
 	public List<SupportGroup> selectAllSupportGroups();
 	
-	public List<SupportGroup> selectUserSupportGroups();
+	public List<SupportGroup> selectUserSupportGroups(int userId);
 
 }

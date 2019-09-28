@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.model.SupportGroup;
@@ -33,10 +34,11 @@ public class SupportGroupController {
 		
 	}
 	
-	@GetMapping(value = "getUserSupportGroups")
-	public @ResponseBody List<SupportGroup> getAllUserSupportGroups() {
+	@GetMapping(value = "getUserSupportGroups{userId}")
+	public @ResponseBody List<SupportGroup> getAllUserSupportGroups(@PathVariable("userId") int userId) {
 		
-		return null;
+		return sgServ.selectUserSupportGroups(userId);
+		
 	}
 
 }
