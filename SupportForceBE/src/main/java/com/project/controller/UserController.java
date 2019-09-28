@@ -1,19 +1,20 @@
 package com.project.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.model.User;
 import com.project.service.UserServiceImpl;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", allowCredentials = "true")
 @Controller
 public class UserController {
 
@@ -28,19 +29,21 @@ public class UserController {
 		this.userServ = userServ;
 	}
 	
-	@PostMapping(value = "login")
-	public static @ResponseBody User login(HttpServletRequest request) {
+	@PostMapping(value = "login", consumes = MediaType.ALL_VALUE)
+	public static @ResponseBody User login(@RequestBody User loginCred, HttpServletRequest request) {
+		HttpSession session = request.getSession();
 		System.out.println("Controller: In the login method");
 		
 		String username = request.getParameter("username");
+		System.out.println(username);
 		String password = request.getParameter("password");
+		System.out.println(password);
 		
-		User user = userServ.UserLogin(username, password);
-		
-		if(user == null) {
+		if(userServ.UserLogin(username, password) == null) {
 			return null;
 		} else {
-			request.getSession().setAttribute("loggeduser", user);
+			User user = userServ.UserLogin(username, password);
+			request.getSession().setAttribute("currentuser", user);
 			return user;
 		}
 		

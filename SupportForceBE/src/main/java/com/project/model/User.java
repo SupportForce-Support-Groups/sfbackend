@@ -147,7 +147,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "\nUser [userId=" + userId + ", username=" + username + ", password=" + password + ", email=" + email
-				+ ", addictions=" + addictions + /*
+				+/* ", addictions=" + addictions +
 													 * ", supportGroups=" + supportGroups.size() + ", posts=" +
 													 * posts.size() + ", replies=" + replies.size() +
 													 */ "]";
