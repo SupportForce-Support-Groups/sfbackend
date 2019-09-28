@@ -36,41 +36,21 @@ public class SupportGroupDaoImpl implements SupportGroupDao {
 	public void insert(SupportGroup mySupportGroup) {
 		
 		sesFact.getCurrentSession().save(mySupportGroup);
-		/*
-		 * Session ses = HibernateUtil.getSession(); Transaction tx =
-		 * ses.beginTransaction();
-		 * 
-		 * ses.save(mySupportGroup);
-		 * 
-		 * tx.commit();
-		 */
+
 	}
 	
 	@Override
 	public List<SupportGroup> selectAllSupportGroups() {
 		
 		return sesFact.getCurrentSession().createQuery("from SupportGroup", SupportGroup.class).list();
-		/*
-		 * Session ses = HibernateUtil.getSession();
-		 * 
-		 * List<SupportGroup> supportGroupList = ses.createQuery("from SupportGroup",
-		 * SupportGroup.class).list();
-		 * 
-		 * return supportGroupList;
-		 */
+		
 	}
 	
 	@Override
 	public SupportGroup selectById(int sgId) {
 		
 		return sesFact.getCurrentSession().get(SupportGroup.class, sgId);
-		/*
-		 * Session ses = HibernateUtil.getSession();
-		 * 
-		 * SupportGroup supportgrp = ses.get(SupportGroup.class, sgId);
-		 * 
-		 * return supportgrp;
-		 */
+		
 	}
 	
 	/*
