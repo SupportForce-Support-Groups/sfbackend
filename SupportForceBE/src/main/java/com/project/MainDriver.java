@@ -104,7 +104,7 @@ public class MainDriver {
 		System.out.println("This is the support group with an ID of 1");
 		System.out.println(sgDao.selectById(1));
 		
-		sgServ.creationOfSupportGroup("Gambling Billionaries", 5);
+		sgServ.creationOfSupportGroup("Gambling Billionaries", 5, 1);
 		System.out.println("These are a list of all support groups in the database: \n");
 		System.out.println(sgDao.selectAllSupportGroups());
 		

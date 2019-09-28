@@ -6,7 +6,7 @@ import com.project.model.SupportGroup;
 
 public interface SupportGroupService {
 	
-	public SupportGroup creationOfSupportGroup(String supportGroupName, int addictionId);
+	public SupportGroup creationOfSupportGroup(String supportGroupName, int addictionId, int userId);
 	
 	public List<SupportGroup> selectAllSupportGroups();
 	
