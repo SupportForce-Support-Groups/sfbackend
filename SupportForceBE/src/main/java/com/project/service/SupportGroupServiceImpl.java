@@ -64,10 +64,12 @@ public class SupportGroupServiceImpl implements SupportGroupService {
 		
 	}
 	
-	
-	  @Override public List<SupportGroup> selectUserSupportGroups() {
-		  return null;
-	  }
+
+	@Override
+	public List<SupportGroup> selectUserSupportGroups() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	 
 
 }
