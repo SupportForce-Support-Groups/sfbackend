@@ -1,5 +1,6 @@
 package com.project.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import com.project.dao.SupportGroupDao;
 import com.project.dao.SupportGroupDaoImpl;
 import com.project.model.Addiction;
 import com.project.model.SupportGroup;
+import com.project.model.User;
 
 @Transactional
 @Service("supportGroupServ")
@@ -66,9 +68,20 @@ public class SupportGroupServiceImpl implements SupportGroupService {
 	
 
 	@Override
-	public List<SupportGroup> selectUserSupportGroups() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<SupportGroup> selectUserSupportGroups(int userId) {
+		List<SupportGroup> userSupportGroups = new ArrayList<>();
+		List<SupportGroup> allSupportGroups = selectAllSupportGroups();
+		
+		for(int i = 0; i < allSupportGroups.size(); i++) {
+			SupportGroup supportGrp = allSupportGroups.get(i);
+			List<User> supportGroupUsers = supportGrp.getSupportGroupUsers();
+			for(int j = 0; j < supportGroupUsers.size(); j++) {
+				if(supportGroupUsers.get(i).getUserId() == userId) {
+					userSupportGroups.add(supportGrp);
+				}
+			}
+		}
+		return userSupportGroups;
 	}
 	 
 
