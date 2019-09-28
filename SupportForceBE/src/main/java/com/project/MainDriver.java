@@ -108,6 +108,8 @@ public class MainDriver {
 		System.out.println("These are a list of all support groups in the database: \n");
 		System.out.println(sgDao.selectAllSupportGroups());
 		
+		System.out.println(sgServ.selectAllSupportGroups());
+		
 		System.out.println("\nDone!");
 	}
 	
