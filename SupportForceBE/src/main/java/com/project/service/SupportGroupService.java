@@ -9,5 +9,7 @@ public interface SupportGroupService {
 	public SupportGroup creationOfSupportGroup(String supportGroupName, int addictionId);
 	
 	public List<SupportGroup> selectAllSupportGroups();
+	
+	public List<SupportGroup> selectUserSupportGroups();
 
 }

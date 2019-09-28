@@ -34,10 +34,8 @@ public class UserController {
 		HttpSession session = request.getSession();
 		System.out.println("Controller: In the login method");
 		
-		String username = request.getParameter("username");
-		System.out.println(username);
-		String password = request.getParameter("password");
-		System.out.println(password);
+		String username = loginCred.getUsername();
+		String password = loginCred.getPassword();
 		
 		if(userServ.UserLogin(username, password) == null) {
 			return null;
