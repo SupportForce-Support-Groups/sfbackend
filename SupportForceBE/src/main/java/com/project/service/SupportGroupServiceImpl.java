@@ -63,5 +63,11 @@ public class SupportGroupServiceImpl implements SupportGroupService {
 		return sgDao.selectAllSupportGroups();
 		
 	}
+	
+	
+	  @Override public List<SupportGroup> selectUserSupportGroups() {
+		  return null;
+	  }
+	 
 
 }

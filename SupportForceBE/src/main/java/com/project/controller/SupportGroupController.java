@@ -32,5 +32,11 @@ public class SupportGroupController {
 		return sgServ.selectAllSupportGroups();
 		
 	}
+	
+	@GetMapping(value = "getUserSupportGroups")
+	public @ResponseBody List<SupportGroup> getAllUserSupportGroups() {
+		
+		return null;
+	}
 
 }
