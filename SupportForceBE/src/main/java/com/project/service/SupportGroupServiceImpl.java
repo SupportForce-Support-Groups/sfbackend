@@ -52,6 +52,14 @@ public class SupportGroupServiceImpl implements SupportGroupService {
 		this.sgDao = sgDao;
 	}
 
+	public UserDao getUserDao() {
+		return userDao;
+	}
+
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
+
 	public SupportGroup creationOfSupportGroup(String supportGroupName, int addictionId, int userId) {
 
 		Addiction addiction = addictionDao.selectById(addictionId);
@@ -93,6 +101,20 @@ public class SupportGroupServiceImpl implements SupportGroupService {
 			}
 		}
 		return userSupportGroups;
+	}
+
+	@Override
+	public SupportGroup joinSupportGroup(int sgId, int userId) {
+		
+		SupportGroup supportGrp = sgDao.selectById(sgId);
+		
+		List<User> listOfUsers = supportGrp.getSupportGroupUsers();
+		
+		User user = userDao.selectById(userId);
+		
+		listOfUsers.add(user);
+		
+		return supportGrp;
 	}
 
 }

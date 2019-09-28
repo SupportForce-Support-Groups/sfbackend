@@ -30,8 +30,11 @@ public class SupportGroupController {
 		this.sgServ = sgServ;
 	}
 	
-	@PostMapping(value = "createSupportGroup")
-	public @ResponseBody SupportGroup creationOfSupportGroup(@RequestBody SupportGroup supportGroup, @RequestBody User user) {
+	//This method creates a post URI for creating a Support Group.
+	//This method will call the creationOfSupportGroup() method in the SupportGroupServiceImpl class.
+	//Will create a support group from the information passed in from the angular portion.
+	@PostMapping(value = "createSupportGroup{userId}")
+	public @ResponseBody SupportGroup creationOfSupportGroup(@RequestBody SupportGroup supportGroup, @PathVariable("userId") int userId) {
 		
 		System.out.println("In the creationOfSupportGroup() method.");
 		System.out.println(supportGroup);
@@ -41,9 +44,12 @@ public class SupportGroupController {
 		supportGrp.setSupportGroupName(supportGroup.getSupportGroupName());
 		supportGrp.setAddict(supportGroup.getAddict());
 		
-		return sgServ.creationOfSupportGroup(supportGrp.getSupportGroupName(), supportGrp.getAddict().getAddictionId(), user.getUserId());
+		return sgServ.creationOfSupportGroup(supportGrp.getSupportGroupName(), supportGrp.getAddict().getAddictionId(), userId);
 	}
 	
+	//This method creates a get URI for retrieving all the Support Groups stored in the database.
+	//This method will call the getAllSupportGroups() method in the SupportGroupServiceImpl class.
+	//Will retrieve all the support groups stored in the database.
 	@GetMapping(value = "getAllSupportGroups")
 	public @ResponseBody List<SupportGroup> getAllSupportGroups() {
 		
@@ -51,11 +57,24 @@ public class SupportGroupController {
 		
 	}
 	
+	//This method creates a get URI for retrieving all the Support Groups associated to a specific user by user id.
+	//This method will call the selectUserSupportGroups() method in the SupportGroupServiceImpl class.
+	//Will retrieve all the support groups associated to the specific user by user id.
 	@GetMapping(value = "getUserSupportGroups{userId}")
 	public @ResponseBody List<SupportGroup> getAllUserSupportGroups(@PathVariable("userId") int userId) {
 		
 		return sgServ.selectUserSupportGroups(userId);
 		
+	}
+	
+	@GetMapping(value = "joinSupportGroup")
+	public @ResponseBody SupportGroup joinSupportGroup(@RequestBody SupportGroup supportGrp, @RequestBody User user) {
+		
+		System.out.println("In the joinSupportGroup");
+		System.out.println(supportGrp);
+		
+		
+		return null;
 	}
 	
 	
