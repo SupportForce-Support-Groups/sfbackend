@@ -20,7 +20,7 @@ jobs:
       - checkout
       ## install `gcloud` and `kubectl` if not already installed
       - gcp-gke/install
-      # ## initialize the `gcloud` and `kubetcl` CLI
+      ## initialize the `gcloud` and `kubetcl` CLI
       # - gcp-gke/init
       - run: gcloud auth activate-service-account --key-file=.circleci/support-force-circleci.json
       - run: gcloud --quiet config set project support-force

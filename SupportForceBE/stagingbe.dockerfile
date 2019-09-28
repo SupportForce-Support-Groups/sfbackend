@@ -6,19 +6,18 @@
 FROM maven:latest as build
 
 ## environment variables
-ARG dockfoovars
-ENV DATABASE_NAME="postgres"
-# ENV DB_SCHEMA=""
-ENV DB_URL="35.236.247.30"
 ENV DB_NAME="postgres"
+# ENV DB_SCHEMA=""
+ENV DB_URL="35.236.247.30:5432"
 ENV DB_USERNAME="postgres"
-ENV DB_PASSWORD=${dockfoovars}
+# ENV DB_PASSWORD=""
 
 ## set up working directory
 COPY . /app
 WORKDIR /app/SupportForceBE
 
 ## build files
+RUN echo ${DB_PASSWORD}
 RUN mvn install
 
 

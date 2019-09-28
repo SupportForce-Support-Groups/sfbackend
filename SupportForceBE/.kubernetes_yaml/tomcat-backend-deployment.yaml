@@ -19,6 +19,12 @@ spec:
       containers:
       - name: "tomcat-backend-containers"
         image: "gcr.io/support-force/supportforcebe:latest"
+        env:
+          - name: "DB_PASSWORD"
+            valueFrom:
+              secretKeyRef:
+                name: "uat-db-secret"
+                key: "foopa"
 ---
 ## autoscaler is not needed in staging, but it works for production
 apiVersion: "autoscaling/v2beta1"
