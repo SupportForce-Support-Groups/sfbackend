@@ -67,8 +67,14 @@ public class PostServiceImpl implements PostService {
 	public List<Post> listOfPostForSupportGroup(int sgId) {
 		SupportGroup supportGrp = sgDao.selectById(sgId);
 		List<Post> postList = supportGrp.getPostList();
+		List<Post> listOfPost = new ArrayList<>();
+		for(int i = 0; i < postList.size(); i++) {
+			Post post = postList.get(i);
+			listOfPost.add(post);
+			continue;
+		}
 		
-		return postList;
+		return listOfPost;
 		
 	}
 
