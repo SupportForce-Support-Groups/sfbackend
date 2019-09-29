@@ -5,6 +5,6 @@ import com.project.model.Reply;
 
 public interface ReplyService {
 	
-	public Reply creationReply(String replyBody, int postId);
+	public Reply creationReply(String replyBody, int postId, int supportGroupId, int userId);
 
 }
