@@ -30,7 +30,7 @@ public class SupportGroupServiceImpl implements SupportGroupService {
 	}
 
 	@Autowired
-	public SupportGroupServiceImpl(AddictionDaoImpl addictionDao, SupportGroupDaoImpl sgDao, UserDaoImpl userDao) {
+	public SupportGroupServiceImpl(AddictionDaoImpl addictionDao, SupportGroupDaoImpl sgDao, UserDao userDao) {
 		this.addictionDao = addictionDao;
 		this.sgDao = sgDao;
 		this.userDao = userDao;
@@ -60,20 +60,20 @@ public class SupportGroupServiceImpl implements SupportGroupService {
 		this.userDao = userDao;
 	}
 
+	@Override
 	public SupportGroup creationOfSupportGroup(String supportGroupName, int addictionId, int userId) {
-
-		Addiction addiction = addictionDao.selectById(addictionId);
-
-		User user = userDao.selectById(userId);
-
-		SupportGroup supportGrp = new SupportGroup(supportGroupName, addiction);
-
-		sgDao.insert(supportGrp);
-
-		user.getSupportGroups().add(supportGrp);
-
-		return supportGrp;
-	}
+        Addiction addiction = addictionDao.selectById(addictionId);
+        
+        System.out.println("This is my user ID " + userId);
+        User user = userDao.selectById(userId);
+        SupportGroup supportGrp = new SupportGroup(supportGroupName, addiction);
+        sgDao.insert(supportGrp);
+        //supportGrp.getSupportGroupUsers().add(user);
+        user.getSupportGroups().add(supportGrp);
+        System.out.println(supportGrp.getSupportGroupUsers());
+        
+        return supportGrp;
+    }
 
 	@Override
 	public List<SupportGroup> selectAllSupportGroups() {
