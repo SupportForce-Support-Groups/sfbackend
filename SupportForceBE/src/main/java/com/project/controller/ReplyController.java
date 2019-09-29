@@ -3,6 +3,7 @@ package com.project.controller;
 import java.util.LinkedHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,6 +35,14 @@ public class ReplyController {
 		String replyBody = replyObject.get("replyBody");
 		
 		return replyServ.creationReply(replyBody, id, Integer.parseInt(supportGroupId), Integer.parseInt(userId));
+	}
+	
+	@GetMapping(value="getAllReplies{postId}")
+	public @ResponseBody Object getAllRepliesByPostId(@PathVariable("postId") String postId) {
+		
+		System.out.println("In the getAllReplies() method");
+		
+		return replyServ.listOfAllRepliesByPostId(Integer.parseInt(postId));
 	}
 
 }
