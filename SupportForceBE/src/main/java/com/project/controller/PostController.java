@@ -27,7 +27,7 @@ public class PostController {
 		this.postServ = postServ;
 	}
 	
-	@PostMapping(value = "createPost{supportGroupId}/{userId}")
+	@PostMapping(value = "createPost{sgId}/{userId}")
 	public @ResponseBody Object creationOfPost(@RequestBody Object post, @PathVariable("sgId") String supportGroupId, @PathVariable("userId") String userId) {
 		
 		System.out.println("In the creationOfPost() method.");
