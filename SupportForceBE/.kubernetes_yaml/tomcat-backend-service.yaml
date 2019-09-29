@@ -21,6 +21,6 @@ spec:
   selector:
     app: "tomcat-backend"
   sessionAffinity: "None"
-  type: "ClusterIP"
+  type: "LoadBalancer"
 # status:
 #   loadBalancer: {}
