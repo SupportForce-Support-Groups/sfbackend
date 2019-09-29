@@ -86,5 +86,14 @@ public class ReplyServiceImpl implements ReplyService{
 		return replyDao.selectAllReplies();
 		
 	}
+	
+	public List<Reply> listOfAllRepliesByPostId(int postId) {
+		
+		Post post = postDao.selectById(postId);
+		
+		List<Reply> listOfReplies = post.getReplies();
+		
+		return listOfReplies;
+	}
 
 }

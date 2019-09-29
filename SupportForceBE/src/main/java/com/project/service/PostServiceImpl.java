@@ -1,5 +1,8 @@
 package com.project.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,6 +46,7 @@ public class PostServiceImpl implements PostService {
 	}
 
 	//This method will create a post object in the database table.
+	@Override
 	public Post creationPost(String postBody , int supportGrpId, int userId) {
 
 		Post post = new Post(postBody);
@@ -57,6 +61,15 @@ public class PostServiceImpl implements PostService {
 		
 		return post;
 
+	}
+	
+	@Override
+	public List<Post> listOfPostForSupportGroup(int sgId) {
+		SupportGroup supportGrp = sgDao.selectById(sgId);
+		List<Post> postList = supportGrp.getPostList();
+		
+		return postList;
+		
 	}
 
 

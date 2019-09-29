@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,6 +40,14 @@ public class PostController {
 		System.out.println(postBody);
 		
 		return postServ.creationPost(postBody, Integer.parseInt(supportGroupId), Integer.parseInt(userId));
+	}
+	
+	@GetMapping(value = "getAllPost{sgId}")
+	public @ResponseBody Object getAllPost(@PathVariable("sgId") String supportId) {
+		System.out.println("In the getAllPost() method");
+		
+		return postServ.listOfPostForSupportGroup(Integer.parseInt(supportId));
+		
 	}
 	
 }
