@@ -30,7 +30,7 @@ public class SupportGroupServiceImpl implements SupportGroupService {
 	}
 
 	@Autowired
-	public SupportGroupServiceImpl(AddictionDaoImpl addictionDao, SupportGroupDaoImpl sgDao) {
+	public SupportGroupServiceImpl(AddictionDaoImpl addictionDao, SupportGroupDaoImpl sgDao, UserDaoImpl userDao) {
 		this.addictionDao = addictionDao;
 		this.sgDao = sgDao;
 		this.userDao = userDao;
@@ -70,7 +70,7 @@ public class SupportGroupServiceImpl implements SupportGroupService {
 
 		sgDao.insert(supportGrp);
 
-		supportGrp.getSupportGroupUsers().add(user);
+		user.getSupportGroups().add(supportGrp);
 
 		return supportGrp;
 	}

@@ -1,5 +1,6 @@
 package com.project.controller;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,17 +35,16 @@ public class SupportGroupController {
 	//This method will call the creationOfSupportGroup() method in the SupportGroupServiceImpl class.
 	//Will create a support group from the information passed in from the angular portion.
 	@PostMapping(value = "createSupportGroup{userId}")
-	public @ResponseBody SupportGroup creationOfSupportGroup(@RequestBody SupportGroup supportGroup, @PathVariable("userId") int userId) {
+	public @ResponseBody Object creationOfSupportGroup(@RequestBody Object supportGroup, @PathVariable("userId") String userId) {
 		
 		System.out.println("In the creationOfSupportGroup() method.");
 		System.out.println(supportGroup);
 		
-		SupportGroup supportGrp = new SupportGroup();
+		LinkedHashMap<String,String> supgrp = (LinkedHashMap<String, String>) supportGroup;
+		int id = Integer.parseInt(supgrp.get("addictionId"));
+		String supportName = supgrp.get("supportGroupName");
 		
-		supportGrp.setSupportGroupName(supportGroup.getSupportGroupName());
-		supportGrp.setAddict(supportGroup.getAddict());
-		
-		return sgServ.creationOfSupportGroup(supportGrp.getSupportGroupName(), supportGrp.getAddict().getAddictionId(), userId);
+		return sgServ.creationOfSupportGroup(supportName, id, Integer.parseInt(userId));
 	}
 	
 	//This method creates a get URI for retrieving all the Support Groups stored in the database.
