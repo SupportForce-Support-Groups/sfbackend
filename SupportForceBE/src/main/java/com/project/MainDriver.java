@@ -77,7 +77,7 @@ public class MainDriver {
 		System.out.println("This is the post with the id of 2");
 		System.out.println(postDao.selectById(2));
 		
-		postServ.creationPost("Hey, where is a good place I can start my path to soberity?");
+		postServ.creationPost("Hey, where is a good place I can start my path to soberity?", 1, 1);
 		replyServ.creationReply("The first step is always admitting you have a problem. Congratulations you are already on route for soberity!", 3);
 		System.out.println("These are a list of all replies in the database: \n");
 		System.out.println(replyServ.listOfAllReplies());
@@ -104,9 +104,11 @@ public class MainDriver {
 		System.out.println("This is the support group with an ID of 1");
 		System.out.println(sgDao.selectById(1));
 		
-		sgServ.creationOfSupportGroup("Gambling Billionaries", 5);
+		sgServ.creationOfSupportGroup("Gambling Billionaries", 5, 1);
 		System.out.println("These are a list of all support groups in the database: \n");
 		System.out.println(sgDao.selectAllSupportGroups());
+		
+		System.out.println(sgServ.selectAllSupportGroups());
 		
 		System.out.println("\nDone!");
 	}

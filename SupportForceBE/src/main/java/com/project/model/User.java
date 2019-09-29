@@ -13,8 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name="users")
+@JsonIgnoreProperties(value= {"supportGroups", "posts", "replies"})
 public class User {
 
 	@Id
@@ -147,7 +150,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "\nUser [userId=" + userId + ", username=" + username + ", password=" + password + ", email=" + email
-				+ ", addictions=" + addictions + /*
+				+/* ", addictions=" + addictions +
 													 * ", supportGroups=" + supportGroups.size() + ", posts=" +
 													 * posts.size() + ", replies=" + replies.size() +
 													 */ "]";

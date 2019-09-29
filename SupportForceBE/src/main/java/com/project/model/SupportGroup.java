@@ -15,8 +15,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "support_group")
+@JsonIgnoreProperties(value = {"postList", "replyList"})
 public class SupportGroup {
 	
 	@Id
@@ -27,7 +30,7 @@ public class SupportGroup {
 	@Column(name = "support_group_name", nullable = false)
 	private String supportGroupName;
 	
-	@ManyToMany(mappedBy = "supportGroups", fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy = "supportGroups", fetch = FetchType.EAGER)
 	private List<User> supportGroupUsers = new ArrayList<>();
 	
 	@ManyToOne
