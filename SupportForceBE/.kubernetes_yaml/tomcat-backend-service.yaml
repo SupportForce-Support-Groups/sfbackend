@@ -14,10 +14,13 @@ metadata:
   # uid: 92b3e3ff-de80-11e9-8dd4-42010a9600d1
 spec:
   clusterIP: 10.89.13.105
+  # loadBalancerIP: 35.199.47.58
+  loadBalancerSourceRanges:
+    - "0.0.0.0/0"
   ports:
   - port: 80
     protocol: "TCP"
-    targetPort: 8080
+    targetPort: 80
   selector:
     app: "tomcat-backend"
   sessionAffinity: "None"

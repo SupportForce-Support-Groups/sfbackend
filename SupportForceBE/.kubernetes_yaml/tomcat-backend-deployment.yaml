@@ -19,6 +19,9 @@ spec:
       containers:
       - name: "tomcat-backend-containers"
         image: "gcr.io/support-force/supportforcebe:latest"
+        ports:
+        - containerPort: 80
+        - containerPort: 8080
         env:
           - name: "DB_PASSWORD"
             valueFrom:
