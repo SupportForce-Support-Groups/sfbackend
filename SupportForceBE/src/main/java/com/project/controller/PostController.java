@@ -16,7 +16,7 @@ import com.project.service.PostServiceImpl;
 @Controller
 public class PostController {
 	
-	private static PostServiceImpl postServ;
+	private PostServiceImpl postServ;
 
 	public PostController() {
 

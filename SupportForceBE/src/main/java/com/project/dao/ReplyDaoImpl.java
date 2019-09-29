@@ -30,40 +30,21 @@ public class ReplyDaoImpl implements ReplyDao {
 	public void insert(Reply myReply) {
 		
 		sesFact.getCurrentSession().save(myReply);
-		/*
-		 * Session ses = HibernateUtil.getSession(); Transaction tx =
-		 * ses.beginTransaction();
-		 * 
-		 * ses.save(myReply);
-		 * 
-		 * tx.commit();
-		 */
+		
 	}
 
 	@Override
 	public List<Reply> selectAllReplies() {
 		
 		return sesFact.getCurrentSession().createQuery("from Reply", Reply.class).list();
-		/*
-		 * Session ses = HibernateUtil.getSession();
-		 * 
-		 * List<Reply> replyList = ses.createQuery("from Reply", Reply.class).list();
-		 * 
-		 * return replyList;
-		 */
+		
 	}
 
 	@Override
 	public Reply selectById(int replyId) {
 		
 		return sesFact.getCurrentSession().get(Reply.class, replyId);
-		/*
-		 * Session ses = HibernateUtil.getSession();
-		 * 
-		 * Reply reply = ses.get(Reply.class, replyId);
-		 * 
-		 * return reply;
-		 */
+		
 	}
 
 }
