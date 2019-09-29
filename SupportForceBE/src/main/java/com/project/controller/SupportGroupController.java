@@ -35,17 +35,31 @@ public class SupportGroupController {
 	//This method will call the creationOfSupportGroup() method in the SupportGroupServiceImpl class.
 	//Will create a support group from the information passed in from the angular portion.
 	@PostMapping(value = "createSupportGroup{userId}")
-	public @ResponseBody Object creationOfSupportGroup(@RequestBody Object supportGroup, @PathVariable("userId") String userId) {
-		
-		System.out.println("In the creationOfSupportGroup() method.");
-		System.out.println(supportGroup);
-		
-		LinkedHashMap<String,String> supgrp = (LinkedHashMap<String, String>) supportGroup;
-		int id = Integer.parseInt(supgrp.get("addictionId"));
-		String supportName = supgrp.get("supportGroupName");
-		
-		return sgServ.creationOfSupportGroup(supportName, id, Integer.parseInt(userId));
-	}
+    public @ResponseBody Object creationOfSupportGroup(@RequestBody Object supportGroupName, @PathVariable("userId") String userId) {
+        
+        System.out.println("In the creationOfSupportGroup() method.");
+        System.out.println(userId);
+//        System.out.println(supportGroup.getSupportGroupName());
+//        System.out.println(supportGroup);
+        System.out.println(supportGroupName);
+        //System.out.println(supportGroupName.getAddictionId());
+        LinkedHashMap<String,String> supgrp = (LinkedHashMap<String,String>) supportGroupName;
+        int id = Integer.parseInt(supgrp.get("addictionId"));
+        String supportName = supgrp.get("supportGroupName");
+        System.out.println(id);
+        System.out.println(supportName);
+    
+        
+        SupportGroup supportGrp = new SupportGroup();
+        
+//        supportGrp.setSupportGroupName(supportGroup.getSupportGroupName());
+//        supportGrp.setAddict(supportGroup);
+//        
+//        System.out.println(supportGroup.getAddict());
+        
+        return sgServ.creationOfSupportGroup(supportName, id, Integer.parseInt(userId));
+    }
+
 	
 	//This method creates a get URI for retrieving all the Support Groups stored in the database.
 	//This method will call the getAllSupportGroups() method in the SupportGroupServiceImpl class.
