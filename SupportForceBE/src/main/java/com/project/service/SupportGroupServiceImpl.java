@@ -113,11 +113,15 @@ public class SupportGroupServiceImpl implements SupportGroupService {
 	public SupportGroup joinSupportGroup(int addictionId, int sgId, int userId) {
 		
 		Addiction addiction = addictionDao.selectById(addictionId);
-		SupportGroup supportGrp = sgDao.selectById(sgId);
-		
-		List<User> listOfUsers = supportGrp.getSupportGroupUsers();
+		//SupportGroup supportGrp = sgDao.selectById(sgId);
 		User user = userDao.selectById(userId);
-		listOfUsers.add(user);
+		
+		//List<User> listOfUsers = supportGrp.getSupportGroupUsers();
+		//User user = userDao.selectById(userId);
+		//listOfUsers.add(user);
+		List<SupportGroup> listOfSupportGroup = user.getSupportGroups();
+		SupportGroup supportGrp = sgDao.selectById(sgId);
+		listOfSupportGroup.add(supportGrp);
 		
 		user.getAddictions().add(addiction);
 		
@@ -128,11 +132,15 @@ public class SupportGroupServiceImpl implements SupportGroupService {
 	public SupportGroup leaveSupportGroup(int addictionId, int sgId, int userId) {
 		
 		Addiction addiction = addictionDao.selectById(addictionId);
-		SupportGroup supportGrp = sgDao.selectById(sgId);
-		
-		List<User> listOfUsers = supportGrp.getSupportGroupUsers();
+		//SupportGroup supportGrp = sgDao.selectById(sgId);
 		User user = userDao.selectById(userId);
-		listOfUsers.remove(user);
+		
+		//List<User> listOfUsers = supportGrp.getSupportGroupUsers();
+		//User user = userDao.selectById(userId);
+		//listOfUsers.remove(user);
+		List<SupportGroup> listOfSupportGroup = user.getSupportGroups();
+		SupportGroup supportGrp = sgDao.selectById(sgId);
+		listOfSupportGroup.remove(supportGrp);
 		
 		user.getAddictions().remove(addiction);
 		
