@@ -17,7 +17,7 @@ spec:
         app: "tomcat-backend"
     spec:
       containers:
-      - name: "tomcat-backend-containers"
+      - name: "supportforcebe-sha256"
         image: "gcr.io/support-force/supportforcebe:latest"
         ports:
         - containerPort: 80

@@ -73,10 +73,10 @@
 		
 		<!-- Javax Dependency -->
 		<dependency>
-           <groupId>javax</groupId>
-           <artifactId>javaee-api</artifactId>
-           <version>8.0.1</version>
-       </dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>8.0.1</version>
+		</dependency>
 
 		<!-- Apache Tomcat -->
 		<dependency>
