@@ -1,5 +1,6 @@
 package com.project.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,10 +91,15 @@ public class ReplyServiceImpl implements ReplyService{
 	public List<Reply> listOfAllRepliesByPostId(int postId) {
 		
 		Post post = postDao.selectById(postId);
-		
 		List<Reply> listOfReplies = post.getReplies();
+		List<Reply> replyList = new ArrayList<>();
 		
-		return listOfReplies;
+		for(int i = 0; i < listOfReplies.size(); i++) {
+			Reply reply = listOfReplies.get(i);
+			replyList.add(reply);
+		}
+		
+		return replyList;
 	}
 
 }

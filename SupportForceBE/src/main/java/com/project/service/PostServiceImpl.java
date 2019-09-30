@@ -71,7 +71,6 @@ public class PostServiceImpl implements PostService {
 		for(int i = 0; i < postList.size(); i++) {
 			Post post = postList.get(i);
 			listOfPost.add(post);
-			continue;
 		}
 		
 		return listOfPost;
