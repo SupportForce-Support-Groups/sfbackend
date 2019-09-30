@@ -59,7 +59,8 @@ public class SupportGroupServiceImpl implements SupportGroupService {
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
-
+	
+	// This method will create a new support group in the database with the use of supportGroupName, addictionId, and userId.
 	@Override
 	public SupportGroup creationOfSupportGroup(String supportGroupName, int addictionId, int userId) {
         Addiction addiction = addictionDao.selectById(addictionId);
@@ -72,9 +73,12 @@ public class SupportGroupServiceImpl implements SupportGroupService {
         user.getSupportGroups().add(supportGrp);
         System.out.println(supportGrp.getSupportGroupUsers());
         
+        user.getAddictions().add(addiction);
+        
         return supportGrp;
     }
 
+	//This method will retrieve all the support groups stored in the database stored in an List.
 	@Override
 	public List<SupportGroup> selectAllSupportGroups() {
 
@@ -82,6 +86,7 @@ public class SupportGroupServiceImpl implements SupportGroupService {
 
 	}
 
+	//This method will retrieve all the support groups associated to a user.
 	@Override
 	public List<SupportGroup> selectUserSupportGroups(int userId) {
 		List<SupportGroup> allSupportGroups = selectAllSupportGroups();
@@ -103,18 +108,55 @@ public class SupportGroupServiceImpl implements SupportGroupService {
 		return userSupportGroups;
 	}
 
+	//This method will allow a user to join a specific support group.
 	@Override
-	public SupportGroup joinSupportGroup(int sgId, int userId) {
+	public SupportGroup joinSupportGroup(int addictionId, int sgId, int userId) {
 		
-		SupportGroup supportGrp = sgDao.selectById(sgId);
-		
-		List<User> listOfUsers = supportGrp.getSupportGroupUsers();
-		
+		Addiction addiction = addictionDao.selectById(addictionId);
+		//SupportGroup supportGrp = sgDao.selectById(sgId);
 		User user = userDao.selectById(userId);
 		
-		listOfUsers.add(user);
+		//List<User> listOfUsers = supportGrp.getSupportGroupUsers();
+		//User user = userDao.selectById(userId);
+		//listOfUsers.add(user);
+		List<SupportGroup> listOfSupportGroup = user.getSupportGroups();
+		SupportGroup supportGrp = sgDao.selectById(sgId);
+		if(addictionId != supportGrp.getAddict().getAddictionId()) {
+			return null;
+		} else {
+			listOfSupportGroup.add(supportGrp);
+			
+			user.getAddictions().add(addiction);
+			
+			return supportGrp;
+			
+		}
+				
+	}
+	
+	//This method will allow a user to leave a specific support group.
+	public SupportGroup leaveSupportGroup(int addictionId, int sgId, int userId) {
 		
-		return supportGrp;
+		Addiction addiction = addictionDao.selectById(addictionId);
+		//SupportGroup supportGrp = sgDao.selectById(sgId);
+		User user = userDao.selectById(userId);
+		
+		//List<User> listOfUsers = supportGrp.getSupportGroupUsers();
+		//User user = userDao.selectById(userId);
+		//listOfUsers.remove(user);
+		List<SupportGroup> listOfSupportGroup = user.getSupportGroups();
+		SupportGroup supportGrp = sgDao.selectById(sgId);
+		if(addictionId != supportGrp.getAddict().getAddictionId()) {
+			return null;
+		} else {
+			listOfSupportGroup.remove(supportGrp);
+			
+			user.getAddictions().remove(addiction);
+			
+			return supportGrp;
+		}
+		
+		
 	}
 
 }

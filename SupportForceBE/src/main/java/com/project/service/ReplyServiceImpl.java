@@ -1,5 +1,6 @@
 package com.project.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,14 @@ import com.project.dao.PostDao;
 import com.project.dao.PostDaoImpl;
 import com.project.dao.ReplyDao;
 import com.project.dao.ReplyDaoImpl;
+import com.project.dao.SupportGroupDao;
+import com.project.dao.SupportGroupDaoImpl;
+import com.project.dao.UserDao;
+import com.project.dao.UserDaoImpl;
 import com.project.model.Post;
 import com.project.model.Reply;
+import com.project.model.SupportGroup;
+import com.project.model.User;
 
 @Transactional
 @Service("replyServ")
@@ -19,6 +26,8 @@ public class ReplyServiceImpl implements ReplyService{
 	
 	private ReplyDao replyDao = new ReplyDaoImpl();
 	private PostDao postDao = new PostDaoImpl();
+	private SupportGroupDao sgDao = new SupportGroupDaoImpl();
+	private UserDao userDao = new UserDaoImpl();
 	
 	public ReplyServiceImpl() {
 		
@@ -30,9 +39,11 @@ public class ReplyServiceImpl implements ReplyService{
 	}
 	
 	@Autowired
-	public ReplyServiceImpl(ReplyDaoImpl replyDao, PostDaoImpl postDao) {
+	public ReplyServiceImpl(ReplyDaoImpl replyDao, PostDaoImpl postDao, SupportGroupDaoImpl sgDao, UserDaoImpl userDao) {
 		this.replyDao = replyDao;
 		this.postDao = postDao;
+		this.sgDao = sgDao;
+		this.userDao = userDao;
 	}
 	
 	public ReplyDao getReplyDao() {
@@ -52,12 +63,21 @@ public class ReplyServiceImpl implements ReplyService{
 	}
 
 	@Override
-	public Reply creationReply(String replyBody, int postId) {
+	public Reply creationReply(String replyBody, int postId, int supportGroupId, int userId) {
 		Post post = postDao.selectById(postId);
 		
 		Reply reply = new Reply(replyBody, post);
 		
 		replyDao.insert(reply);
+		
+		post.getReplies().add(reply);
+		System.out.println(post.getReplies());
+		
+		SupportGroup supportGroup = sgDao.selectById(supportGroupId);
+		supportGroup.getReplyList().add(reply);
+		
+		User user = userDao.selectById(userId);
+		user.getReplies().add(reply);
 		
 		return reply;
 	}
@@ -66,6 +86,20 @@ public class ReplyServiceImpl implements ReplyService{
 		
 		return replyDao.selectAllReplies();
 		
+	}
+	
+	public List<Reply> listOfAllRepliesByPostId(int postId) {
+		
+		Post post = postDao.selectById(postId);
+		List<Reply> listOfReplies = post.getReplies();
+		List<Reply> replyList = new ArrayList<>();
+		
+		for(int i = 0; i < listOfReplies.size(); i++) {
+			Reply reply = listOfReplies.get(i);
+			replyList.add(reply);
+		}
+		
+		return replyList;
 	}
 
 }
