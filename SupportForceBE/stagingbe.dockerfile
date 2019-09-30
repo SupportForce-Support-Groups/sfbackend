@@ -40,11 +40,8 @@ ENV DB_URL="jdbc:postgresql://35.236.247.30:5432/postgres"
 ENV DB_USERNAME="postgres"
 # ENV DB_PASSWORD=""
 
-## run tomcat server (port is 80)
+## run tomcat server (port is 8080)
 # RUN ls /usr/local/tomcat/conf
 # RUN ls /usr/local/tomcat/webapps
 # RUN ls /usr/local/tomcat
-RUN /usr/local/tomcat/bin/startup.sh
-
-## persist container
-CMD tail -f /dev/null
+CMD /usr/local/tomcat/bin/startup.sh
