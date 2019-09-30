@@ -116,5 +116,17 @@ public class SupportGroupServiceImpl implements SupportGroupService {
 		
 		return supportGrp;
 	}
+	
+	public SupportGroup leaveSupportGroup(int sgId, int userId) {
+		SupportGroup supportGrp = sgDao.selectById(sgId);
+		
+		List<User> listOfUsers = supportGrp.getSupportGroupUsers();
+		
+		User user = userDao.selectById(userId);
+		
+		listOfUsers.add(user);
+		
+		return supportGrp;
+	}
 
 }
