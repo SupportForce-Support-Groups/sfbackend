@@ -91,9 +91,9 @@ public class SupportGroupController {
 		System.out.println(supportGroup);
 		System.out.println(userId);
 
-		LinkedHashMap<String,Integer> supportGroupObject = (LinkedHashMap<String,Integer>) supportGroup;
-		int supportGroupId = supportGroupObject.get("groupNumber").intValue();
-		int addictionId = supportGroupObject.get("addictionId").intValue();
+		LinkedHashMap<String,String> supportGroupObject = (LinkedHashMap<String, String>) supportGroup;
+		int supportGroupId = Integer.parseInt(supportGroupObject.get("groupNumber"));
+		int addictionId = Integer.parseInt(supportGroupObject.get("addictionId"));
 
 		return sgServ.joinSupportGroup(addictionId, supportGroupId, Integer.parseInt(userId));
 
@@ -109,9 +109,9 @@ public class SupportGroupController {
 		System.out.println(supportGroup);
 		System.out.println(userId);
 
-		LinkedHashMap<String, Integer> supportGroupObject = (LinkedHashMap<String, Integer>) supportGroup;
-		int supportGroupId = supportGroupObject.get("groupNumber").intValue();
-		int addictionId = supportGroupObject.get("addicitionId").intValue();
+		LinkedHashMap<String, String> supportGroupObject = (LinkedHashMap<String, String>) supportGroup;
+		int supportGroupId = Integer.parseInt(supportGroupObject.get("groupNumber"));
+		int addictionId = Integer.parseInt(supportGroupObject.get("addictionId"));
 
 		return sgServ.leaveSupportGroup(addictionId, supportGroupId, Integer.parseInt(userId));
 
