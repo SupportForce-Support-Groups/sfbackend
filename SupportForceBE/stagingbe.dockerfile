@@ -28,7 +28,7 @@ RUN mvn install
 FROM tomcat:latest as deliver
 
 ## copy tomcat settings into tomcat/conf
-COPY --from=build ["/app/Servers/Tomcat v9.0 Server at localhost-config/", "/usr/local/tomcat/conf"]
+# COPY --from=build ["/app/Servers/Tomcat v9.0 Server at localhost-config/", "/usr/local/tomcat/conf"]
 
 ## copy war artifact build into tomcat/webapps
 COPY --from=build /app/SupportForceBE/target/SupportForceBE-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps
