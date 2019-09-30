@@ -121,11 +121,17 @@ public class SupportGroupServiceImpl implements SupportGroupService {
 		//listOfUsers.add(user);
 		List<SupportGroup> listOfSupportGroup = user.getSupportGroups();
 		SupportGroup supportGrp = sgDao.selectById(sgId);
-		listOfSupportGroup.add(supportGrp);
-		
-		user.getAddictions().add(addiction);
-		
-		return supportGrp;
+		if(addictionId != supportGrp.getAddict().getAddictionId()) {
+			return null;
+		} else {
+			listOfSupportGroup.add(supportGrp);
+			
+			user.getAddictions().add(addiction);
+			
+			return supportGrp;
+			
+		}
+				
 	}
 	
 	//This method will allow a user to leave a specific support group.
@@ -140,11 +146,17 @@ public class SupportGroupServiceImpl implements SupportGroupService {
 		//listOfUsers.remove(user);
 		List<SupportGroup> listOfSupportGroup = user.getSupportGroups();
 		SupportGroup supportGrp = sgDao.selectById(sgId);
-		listOfSupportGroup.remove(supportGrp);
+		if(addictionId != supportGrp.getAddict().getAddictionId()) {
+			return null;
+		} else {
+			listOfSupportGroup.remove(supportGrp);
+			
+			user.getAddictions().remove(addiction);
+			
+			return supportGrp;
+		}
 		
-		user.getAddictions().remove(addiction);
 		
-		return supportGrp;
 	}
 
 }
