@@ -44,7 +44,7 @@ ENV DB_USERNAME="postgres"
 # RUN ls /usr/local/tomcat/conf
 # RUN ls /usr/local/tomcat/webapps
 # RUN ls /usr/local/tomcat
-# RUN /usr/local/tomcat/bin/startup.sh
+RUN /usr/local/tomcat/bin/startup.sh
 
 ## persist container
 CMD tail -f /dev/null
