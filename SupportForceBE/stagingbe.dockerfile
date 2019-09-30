@@ -25,7 +25,7 @@ RUN mvn install
 #########################
 
 ## base image
-FROM tomcat:latest as deliver
+FROM tomcat:8.0 as deliver
 
 ## copy tomcat settings into tomcat/conf
 # COPY --from=build ["/app/Servers/Tomcat v9.0 Server at localhost-config/", "/usr/local/tomcat/conf"]
