@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+// The model for a support group object.
 @Entity
 @Table(name = "support_group")
 @JsonIgnoreProperties(value = {"postList", "replyList"})

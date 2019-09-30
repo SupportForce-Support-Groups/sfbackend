@@ -28,6 +28,9 @@ public class ReplyController {
 		this.replyServ = replyServ;
 	}
 	
+	// This method creates a post URI for creating a new Reply within a Post.
+	// This method will call the creationReply() method in the ReplyServiceImpl class.
+	// Will create a reply from the information passed in from the angular portion (supportGroupId, userId, and postId).
 	@PostMapping(value="createReply{postId}/{sgId}/{userId}")
 	public @ResponseBody Object creationOfReplies(@RequestBody Object reply, @PathVariable("postId") String postId, @PathVariable("sgId") String supportGroupId, @PathVariable("userId") String userId) {
 		
@@ -40,6 +43,9 @@ public class ReplyController {
 		return replyServ.creationReply(replyBody, Integer.parseInt(postId), Integer.parseInt(supportGroupId), Integer.parseInt(userId));
 	}
 	
+	// This method creates a get URI for getting all the replies associated to a post.
+	// This method will the listOfAllRepliesByPostId() method in the ReplyServiceImpl class.
+	// Will get all the replies associated to a specific post.
 	@GetMapping(value="getAllReply{postId}")
 	public @ResponseBody Object getAllRepliesByPostId(@PathVariable("postId") String postId) {
 		
