@@ -63,6 +63,7 @@ public class PostServiceImpl implements PostService {
 
 	}
 	
+	// This method will return a list of post for a specific support group.
 	@Override
 	public List<Post> listOfPostForSupportGroup(int sgId) {
 		SupportGroup supportGrp = sgDao.selectById(sgId);
@@ -77,11 +78,12 @@ public class PostServiceImpl implements PostService {
 		
 	}
 	
+	// This method will return a specific post by it's postId.
+	@Override
 	public Post specificPost(int postId) {
 		
 		return postDao.selectById(postId);
 		
 	}
-
 
 }
