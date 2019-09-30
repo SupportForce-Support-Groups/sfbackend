@@ -42,6 +42,13 @@ public class PostController {
 		return postServ.creationPost(postBody, Integer.parseInt(supportGroupId), Integer.parseInt(userId));
 	}
 	
+	@GetMapping(value = "getSpecificPost{postId}")
+	public @ResponseBody Object getSpecficPost(@PathVariable("postId") String postId) {
+		System.out.println("In the getSpecificPost() method.");
+		
+		return postServ.specificPost(Integer.parseInt(postId));
+	}
+	
 	@GetMapping(value = "getAllPost{sgId}")
 	public @ResponseBody Object getAllPost(@PathVariable("sgId") String supportId) {
 		System.out.println("In the getAllPost() method");

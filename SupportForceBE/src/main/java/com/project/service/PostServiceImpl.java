@@ -76,6 +76,12 @@ public class PostServiceImpl implements PostService {
 		return listOfPost;
 		
 	}
+	
+	public Post specificPost(int postId) {
+		
+		return postDao.selectById(postId);
+		
+	}
 
 
 }

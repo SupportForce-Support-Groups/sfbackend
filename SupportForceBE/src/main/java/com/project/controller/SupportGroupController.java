@@ -81,16 +81,26 @@ public class SupportGroupController {
 		
 	}
 	
-	@GetMapping(value = "joinSupportGroup")
-	public @ResponseBody SupportGroup joinSupportGroup(@RequestBody SupportGroup supportGrp, @RequestBody User user) {
+	@GetMapping(value = "joinSupportGroup{sgId}/{userId}")
+	public @ResponseBody SupportGroup joinSupportGroup(@PathVariable("sgId") String supportGrpId, @PathVariable("userId") String userId) {
 		
-		System.out.println("In the joinSupportGroup");
-		System.out.println(supportGrp);
+		System.out.println("In the joinSupportGroup() method");
+		System.out.println(supportGrpId);
+		System.out.println(userId);
 		
+		return sgServ.joinSupportGroup(Integer.parseInt(supportGrpId), Integer.parseInt(userId));
 		
-		return null;
 	}
 	
-	
+	@GetMapping(value="leaveSupportGroup{sgId}/{userId}")
+	public @ResponseBody SupportGroup leaveSupportGroup(@PathVariable("sgId") String supportGrpId, @PathVariable("userId") String userId) {
+		
+		System.out.println("In the leaveSupportGroup() method");
+		System.out.println(supportGrpId);
+		System.out.println(userId);
+		
+		return sgServ.leaveSupportGroup(Integer.parseInt(supportGrpId), Integer.parseInt(userId));
+		
+	}
 
 }
