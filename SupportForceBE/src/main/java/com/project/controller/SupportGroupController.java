@@ -84,31 +84,33 @@ public class SupportGroupController {
 	//This method creates a get URI for retrieving all the .
 	//This method will call the selectUserSupportGroups() method in the SupportGroupServiceImpl class.
 	//Will retrieve all the support groups associated to the specific user by user id.
-	@PostMapping(value = "joinSupportGroup{sgId}/{userId}")
-	public @ResponseBody SupportGroup joinSupportGroup(@RequestBody Object addiction, @PathVariable("sgId") String supportGrpId, @PathVariable("userId") String userId) {
+	@PostMapping(value = "joinSupportGroup{userId}")
+	public @ResponseBody SupportGroup joinSupportGroup(@RequestBody Object supportGroup, @PathVariable("userId") String userId) {
 
 		System.out.println("In the joinSupportGroup() method");
-		System.out.println(supportGrpId);
+		System.out.println(supportGroup);
 		System.out.println(userId);
 		
-		LinkedHashMap<String,String> addictionObject = (LinkedHashMap<String,String>) addiction;
-		int addictionId = Integer.parseInt(addictionObject.get("addictionId"));
+		LinkedHashMap<String,String> supportGroupObject = (LinkedHashMap<String,String>) supportGroup;
+		int supportGroupId = Integer.parseInt(supportGroupObject.get("groupNumber"));
+		int addictionId = Integer.parseInt(supportGroupObject.get("addictionId"));
 
-		return sgServ.joinSupportGroup(addictionId, Integer.parseInt(supportGrpId), Integer.parseInt(userId));
+		return sgServ.joinSupportGroup(addictionId, supportGroupId, Integer.parseInt(userId));
 
 	}
 
-	@PostMapping(value="leaveSupportGroup{sgId}/{userId}")
-	public @ResponseBody SupportGroup leaveSupportGroup(@RequestBody Object addiction, @PathVariable("sgId") String supportGrpId, @PathVariable("userId") String userId) {
+	@PostMapping(value="leaveSupportGroup{userId}")
+	public @ResponseBody SupportGroup leaveSupportGroup(@RequestBody Object supportGroup, @PathVariable("userId") String userId) {
 
 		System.out.println("In the leaveSupportGroup() method");
-		System.out.println(supportGrpId);
+		System.out.println(supportGroup);
 		System.out.println(userId);
 		
-		LinkedHashMap<String, String> addictionObject = (LinkedHashMap<String, String>) addiction;
-		int addictionId = Integer.parseInt(addictionObject.get("addicitionId"));
+		LinkedHashMap<String, String> supportGroupObject = (LinkedHashMap<String, String>) supportGroup;
+		int supportGroupId = Integer.parseInt(supportGroupObject.get("groupNumber"));
+		int addictionId = Integer.parseInt(supportGroupObject.get("addicitionId"));
 
-		return sgServ.leaveSupportGroup(addictionId, Integer.parseInt(supportGrpId), Integer.parseInt(userId));
+		return sgServ.leaveSupportGroup(addictionId, supportGroupId, Integer.parseInt(userId));
 
 	}
 
