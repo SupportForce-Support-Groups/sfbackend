@@ -81,16 +81,16 @@ public class SupportGroupController {
 
 	}
 
-	//This method creates a get URI for retrieving all the .
-	//This method will call the selectUserSupportGroups() method in the SupportGroupServiceImpl class.
-	//Will retrieve all the support groups associated to the specific user by user id.
+	//This method creates a post URI for joining support groups.
+	//This method will call the joinSupportGroup() method in the SupportGroupServiceImpl class.
+	//Will allow a user to join a support group they choose.
 	@PostMapping(value = "joinSupportGroup{userId}")
 	public @ResponseBody SupportGroup joinSupportGroup(@RequestBody Object supportGroup, @PathVariable("userId") String userId) {
 
 		System.out.println("In the joinSupportGroup() method");
 		System.out.println(supportGroup);
 		System.out.println(userId);
-		
+
 		LinkedHashMap<String,String> supportGroupObject = (LinkedHashMap<String,String>) supportGroup;
 		int supportGroupId = Integer.parseInt(supportGroupObject.get("groupNumber"));
 		int addictionId = Integer.parseInt(supportGroupObject.get("addictionId"));
@@ -99,13 +99,16 @@ public class SupportGroupController {
 
 	}
 
+	//This method creates a post URI for leaving support groups.
+	//This method will call the leaveSupportGroup() method in the SupportGroupServiceImpl class.
+	//Will allow a user to leave a support group they choose.
 	@PostMapping(value="leaveSupportGroup{userId}")
 	public @ResponseBody SupportGroup leaveSupportGroup(@RequestBody Object supportGroup, @PathVariable("userId") String userId) {
 
 		System.out.println("In the leaveSupportGroup() method");
 		System.out.println(supportGroup);
 		System.out.println(userId);
-		
+
 		LinkedHashMap<String, String> supportGroupObject = (LinkedHashMap<String, String>) supportGroup;
 		int supportGroupId = Integer.parseInt(supportGroupObject.get("groupNumber"));
 		int addictionId = Integer.parseInt(supportGroupObject.get("addicitionId"));
