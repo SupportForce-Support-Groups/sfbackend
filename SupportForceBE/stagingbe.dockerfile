@@ -30,8 +30,9 @@ FROM tomcat:8.0 as deliver
 ## copy tomcat settings into tomcat/conf
 # COPY --from=build ["/app/Servers/Tomcat v9.0 Server at localhost-config/", "/usr/local/tomcat/conf"]
 
-## copy war artifact build into tomcat/webapps
+## copy war artifact and execution script from build into tomcat/webapps
 COPY --from=build /app/SupportForceBE/target/SupportForceBE-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps
+COPY --from=build /app/SupportForceBE/.kubernetes_yaml/execution_script.sh /usr/local/tomcat
 
 ## environment variables
 ENV DB_NAME="postgres"
@@ -47,4 +48,4 @@ ENV DB_USERNAME="postgres"
 RUN /usr/local/tomcat/bin/startup.sh
 
 ## persist container
-CMD tail -f /dev/null
+CMD /bin/bash /usr/local/tomcat/execution_script.sh
