@@ -28,17 +28,16 @@ public class ReplyController {
 		this.replyServ = replyServ;
 	}
 	
-	@PostMapping(value="createReply{sgId}/{userId}")
-	public @ResponseBody Object creationOfReplies(@RequestBody Object reply, @PathVariable("sgId") String supportGroupId, @PathVariable("userId") String userId) {
+	@PostMapping(value="createReply{postId}/{sgId}/{userId}")
+	public @ResponseBody Object creationOfReplies(@RequestBody Object reply, @PathVariable("postId") String postId, @PathVariable("sgId") String supportGroupId, @PathVariable("userId") String userId) {
 		
 		System.out.println("In createReply() method.");
 		System.out.println(reply);
 		
 		LinkedHashMap<String, String> replyObject = (LinkedHashMap<String, String>) reply;
-		int id = Integer.parseInt(replyObject.get("postId"));
 		String replyBody = replyObject.get("replyBody");
 		
-		return replyServ.creationReply(replyBody, id, Integer.parseInt(supportGroupId), Integer.parseInt(userId));
+		return replyServ.creationReply(replyBody, Integer.parseInt(postId), Integer.parseInt(supportGroupId), Integer.parseInt(userId));
 	}
 	
 	@GetMapping(value="getAllReply{postId}")
