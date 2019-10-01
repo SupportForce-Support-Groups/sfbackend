@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class AspectClass {
 	
 	@Around("execution(* login(..))")
-	public void logLogin(ProceedingJoinPoint pjp) throws Throwable {
+	public void logLogin(ProceedingJoinPoint pjp) throws Throwable { 
 		System.out.println("-------Logging Aspect login() method: " + pjp.getSignature().getName() + ": Before Method Execution");
 		pjp.proceed();
 		System.out.println("-------Logging Aspect login() method: " + pjp.getSignature().getName() + ": After Method Execution");
