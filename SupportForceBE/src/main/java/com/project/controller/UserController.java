@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.model.User;
 import com.project.service.UserServiceImpl;
 
-@CrossOrigin(origins = "*", allowCredentials = "true")
+@CrossOrigin(origins = "*"/*replace with frontend IP address and port number*/, allowedHeaders = "*", allowCredentials = "true")
 @Controller
 public class UserController {
 
