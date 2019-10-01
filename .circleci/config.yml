@@ -32,7 +32,7 @@ jobs:
       ## delete current deployment if one is running
       - run: kubectl delete deployments --namespace backend tomcat-backend || true
       ## wait for deletion to complete
-      - run: sleep 90
+      - run: sleep 120
       ## create anew a supportforce-cluster deployment (and autoscaler if not already running)
       - run: kubectl apply -f SupportForceBE/.kubernetes_yaml/tomcat-backend-deployment.yaml
       ## create supportforce-cluster service if not already running

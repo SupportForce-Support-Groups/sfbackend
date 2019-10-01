@@ -38,7 +38,7 @@ ENV DB_PASSWORD="OrCbp5r8HxIxcPkK"
 COPY --from=build ["/app/Servers/Tomcat v9.0 Server at localhost-config/web.xml", "/usr/local/tomcat/conf"]
 
 ## copy war artifact and execution script from build into tomcat/webapps
-COPY --from=build /app/SupportForceBE/target/SupportForceBE-0.0.1-SNAPSHOT.war /usr/local/tomcat
+COPY --from=build /app/SupportForceBE/target/SupportForceBE-0.0.1-SNAPSHOT.war /usr/local/tomcat/SupportForceBE.war
 COPY --from=build /app/SupportForceBE/.kubernetes_yaml/execution_script.sh /usr/local/tomcat
 
 ## run tomcat server on port 8080
