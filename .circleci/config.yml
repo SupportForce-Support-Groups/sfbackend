@@ -26,11 +26,13 @@ jobs:
       - run: gcloud --quiet config set project support-force
       - run: gcloud --quiet config set compute/zone us-east4-a
       ## update a deployment docker image
-      - run: gcloud container clusters get-credentials supportforce-cluster
+      - run: gcloud container clusters get-credentials supportforce-dev-cluster
       ## add namespaces (if not already added)
       - run: kubectl apply -f SupportForceBE/.kubernetes_yaml/tomcat-backend-namespace.yaml
       ## delete current deployment if one is running
       - run: kubectl delete deployments --namespace backend tomcat-backend || true
+      ## wait for deletion to complete
+      - run: sleep 90
       ## create anew a supportforce-cluster deployment (and autoscaler if not already running)
       - run: kubectl apply -f SupportForceBE/.kubernetes_yaml/tomcat-backend-deployment.yaml
       ## create supportforce-cluster service if not already running
