@@ -35,7 +35,7 @@ ENV DB_USERNAME="postgres"
 ENV DB_PASSWORD="OrCbp5r8HxIxcPkK"
 
 ## copy tomcat settings into tomcat/conf
-# COPY --from=build ["/app/Servers/Tomcat v9.0 Server at localhost-config/", "/usr/local/tomcat/conf"]
+COPY --from=build ["/app/Servers/Tomcat v9.0 Server at localhost-config/web.xml", "/usr/local/tomcat/conf"]
 
 ## copy war artifact and execution script from build into tomcat/webapps
 COPY --from=build /app/SupportForceBE/target/SupportForceBE-0.0.1-SNAPSHOT.war /usr/local/tomcat
