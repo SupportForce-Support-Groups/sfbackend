@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.model.User;
 import com.project.service.UserServiceImpl;
 
-@CrossOrigin(origins = "http://www.support-force.org", allowCredentials = "true")
+@CrossOrigin(origins = "http://www.support-force.org", allowedHeaders = "*", allowCredentials = "true")
 @Controller
 public class UserController {
 
