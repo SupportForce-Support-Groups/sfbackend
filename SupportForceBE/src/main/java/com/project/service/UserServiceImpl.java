@@ -61,19 +61,17 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User registerUser(String username, String password, String email) {
 		
-		List<User> listOfUsers = userDao.selectAllUsers();
-		for(User user: listOfUsers) {
-			if(user.getUsername() != username) {
-				User newUser = new User(username, password, email);
-				
-				userDao.insert(newUser);
-
-				return newUser;
-			} else {
-				System.out.println("This username exists already. Please input a different user.");
-			}
+		try {
+			User newUser = new User(username, password, email);
+			
+			userDao.insert(newUser);
+			return newUser;
+		} catch(Exception e) {
+			System.out.println("This username exists already. Please input a different user.");
+			return null;
+			
 		}
-		return null;
+		
 	}
 
 }
