@@ -9,7 +9,7 @@ FROM maven:latest as build
 ENV DB_NAME="postgres"
 # ENV DB_SCHEMA=""
 ENV DB_URL="jdbc:postgresql://10.0.160.3:5432/postgres"
-ENV DB_USERNAME="postgres"
+# ENV DB_USERNAME="postgres"
 # ENV DB_PASSWORD=""
 
 ## set up working directory
@@ -31,7 +31,7 @@ FROM tomcat:latest as deliver
 ENV DB_NAME="postgres"
 # ENV DB_SCHEMA=""
 ENV DB_URL="jdbc:postgresql://10.0.160.3:5432/postgres"
-ENV DB_USERNAME="postgres"
+# ENV DB_USERNAME="postgres"
 # ENV DB_PASSWORD=""
 
 ## copy tomcat settings into tomcat/conf
