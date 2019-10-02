@@ -86,6 +86,13 @@ public class SupportGroupServiceImpl implements SupportGroupService {
 
 	}
 
+	//This method will retrieve a specific support group.
+	@Override
+	public SupportGroup selectSpecificSupportGroup(int sgId) {
+		
+		return sgDao.selectById(sgId);
+		
+	}
 	//This method will retrieve all the support groups associated to a user.
 	@Override
 	public List<SupportGroup> selectUserSupportGroups(int userId) {

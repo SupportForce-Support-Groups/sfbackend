@@ -70,6 +70,13 @@ public class SupportGroupController {
 		return sgServ.selectAllSupportGroups();
 
 	}
+	
+	@GetMapping(value="getSupportGroup{sgId}")
+	public @ResponseBody SupportGroup getSupportGroup(@PathVariable("sgId") String supportGrpId) {
+		
+		return sgServ.selectSpecificSupportGroup(Integer.parseInt(supportGrpId));
+		
+	}
 
 	//This method creates a get URI for retrieving all the Support Groups associated to a specific user by user id.
 	//This method will call the selectUserSupportGroups() method in the SupportGroupServiceImpl class.
