@@ -10,6 +10,8 @@ public interface SupportGroupService {
 	
 	public List<SupportGroup> selectAllSupportGroups();
 	
+	public SupportGroup selectSpecificSupportGroup(int sgId);
+	
 	public List<SupportGroup> selectUserSupportGroups(int userId);
 	
 	public SupportGroup joinSupportGroup(int addictionId, int sgId, int userid);

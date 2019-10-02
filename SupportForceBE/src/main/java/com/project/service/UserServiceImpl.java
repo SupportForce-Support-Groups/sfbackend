@@ -65,14 +65,12 @@ public class UserServiceImpl implements UserService {
 			User newUser = new User(username, password, email);
 			
 			userDao.insert(newUser);
-			
 			return newUser;
-			
-		}catch(Exception e) {
+		} catch(Exception e) {
 			System.out.println("This username exists already. Please input a different user.");
 			return null;
+			
 		}
-		
 		
 	}
 
