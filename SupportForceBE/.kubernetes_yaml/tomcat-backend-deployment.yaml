@@ -33,27 +33,6 @@ spec:
               secretKeyRef:
                 name: "uat-db-secret"
                 key: "fooser"
-      - name: "cloudsql-proxy"
-        image: "gcr.io/cloudsql-docker/gce-proxy:1.14"
-        command: [
-          "/cloud_sql_proxy",
-          "-instances=uat-db-01=tcp:3306",
-          # If running on a VPC, the Cloud SQL proxy can connect via Private IP. See:
-          # https://cloud.google.com/sql/docs/mysql/private-ip for more info.
-          # "-ip_address_types=PRIVATE",
-          "-credential_file=/secrets/cloudsql/credentials.json"
-        ]
-        securityContext:
-          runAsUser: 2  # non-root user
-          allowPrivilegeEscalation: false
-        volumeMounts:
-          - name: "uat-db-secret"
-            mountPath: "/secrets/cloudsql"
-            readOnly: true
-        volumes:
-        - name: "uat-db-secret"
-          secret:
-            secretName: "cloudsql-instance-credentials"
 ---
 ## autoscaler is not needed in staging, but it works for production
 apiVersion: "autoscaling/v2beta1"

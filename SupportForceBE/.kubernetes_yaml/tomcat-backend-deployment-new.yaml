@@ -1,16 +1,4 @@
 ---
-apiVersion: "v1"
-kind: "ConfigMap"
-metadata:
-  name: "tomcat-backend-config"
-  namespace: "backend"
-  labels:
-    app: "tomcat-backend"
-data:
-  DB_USERNAME: "postgres"
-  DB_URL: "jdbc:postgresql://35.236.247.30:5432/postgres"
-  DB_PASSWORD: "OrCbp5r8HxIxcPkK"
----
 apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
@@ -29,32 +17,57 @@ spec:
         app: "tomcat-backend"
     spec:
       containers:
-      - name: "supportforcebe-sha256"
-        image: "gcr.io/support-force/supportforcebe@sha256:ad2fe39751c0911d394b48bc062d00a2e25fa54ab02138e7cc0b45d6ec3a145d"
+      - name: "uat-supportforcebe-sha256"
+        image: "gcr.io/support-force/uat-supportforcebe:latest"
+        ports:
+        - containerPort: 80
+        - containerPort: 8080
         env:
-        - name: "DB_USERNAME"
-          valueFrom:
-            configMapKeyRef:
-              key: "DB_USERNAME"
-              name: "tomcat-backend-config"
-        - name: "DB_URL"
-          valueFrom:
-            configMapKeyRef:
-              key: "DB_URL"
-              name: "tomcat-backend-config"
-        - name: "DB_PASSWORD"
-          valueFrom:
-            configMapKeyRef:
-              key: "DB_PASSWORD"
-              name: "tomcat-backend-config"
+          - name: "DB_PASSWORD"
+            valueFrom:
+              secretKeyRef:
+                name: "uat-db-secret"
+                key: "foopa"
+          - name: "DB_USERNAME"
+            valueFrom:
+              secretKeyRef:
+                name: "uat-db-secret"
+                key: "fooser"
+      - name: "cloudsql-proxy"
+        image: "gcr.io/cloudsql-docker/gce-proxy:1.14"
+        command: [
+          "/cloud_sql_proxy",
+          "-instances=uat-db-01=tcp:3306",
+          # If running on a VPC, the Cloud SQL proxy can connect via Private IP. See:
+          # https://cloud.google.com/sql/docs/mysql/private-ip for more info.
+          # "-ip_address_types=PRIVATE",
+          "-credential_file=/secrets/cloudsql/credentials.json"
+        ]
+        securityContext:
+          runAsUser: 2  # non-root user
+          allowPrivilegeEscalation: false
+        volumeMounts:
+          - name: "uat-db-secret"
+            mountPath: "/secrets/cloudsql"
+            readOnly: true
+      volumes:
+      - name: "uat-db-secret"
+        secret:
+          secretName: "uat-db-secret"
+          items:
+            - key: "fooser"
+              path: "username"
+            - key: "foopa"
+              path: "password"
 ---
+## autoscaler is not needed in staging, but it works for production
 apiVersion: "autoscaling/v2beta1"
 kind: "HorizontalPodAutoscaler"
 metadata:
   name: "tomcat-backend-hpa"
   namespace: "backend"
   labels:
-    app: "tomcat-backend"
+    app: "tomcat-backend-hpa"
 spec:
   scaleTargetRef:
     kind: "Deployment"

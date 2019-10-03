@@ -15,8 +15,8 @@ metadata:
 spec:
   clusterIP: 10.89.13.105
   # loadBalancerIP: 35.199.47.58
-  loadBalancerSourceRanges:
-    - "0.0.0.0/0"
+  # loadBalancerSourceRanges:
+  #  - "0.0.0.0/0"
   ports:
   - port: 80
     protocol: "TCP"
